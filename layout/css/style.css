@@ -1,0 +1,558 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.containerfull,
+.row {
+    
+    float: left;
+    width: 100%;
+    
+}
+
+.containerfull img,
+.boxleft img,
+.boxright img,
+.boxnews {
+    width: 100%;
+    object-fit: cover;
+}
+
+.container2 {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.container2 .box3 {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}
+
+.padd20 {
+    padding: 15px 0px;
+}
+
+.padd50 {
+    padding: 50px 0px;
+}
+
+.box50 {
+    float: left;
+    width: calc(50% - 30px);
+}
+
+
+.box25 {
+    float: left;
+    width: 25%;
+    width: calc(25% - 30px);
+    position: relative;
+}
+
+.best {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-image: url("../images/best-seller.png");
+    background-size: 100%;
+}
+
+.box50 img,
+.box25 img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #999999;
+}
+
+section,
+.mr30 {
+    margin: 30px 0px;
+}
+
+.mr15 {
+    margin-right: 30px;
+}
+
+.mr5pt {
+    margin-right: 5%;
+}
+
+.mr2pt {
+    margin-right: 2%;
+}
+
+.boxnews {
+    float: left;
+    width: calc(33.33% - 2%);
+}
+
+.boxnews img {
+    border-radius: 10px;
+}
+
+.bg1 {
+    background-color: #fef8e6;
+}
+
+footer {
+    float: left;
+    width: 100%;
+    background-color: #993300;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.boxleft {
+    float: left;
+    width: 45%;
+}
+
+.boxright {
+    float: left;
+    width: 48%;
+}
+
+.boxleft_bgw {
+    float: left;
+    width: 35%;
+}
+
+.boxright_bgw {
+    float: left;
+    width: 60%;
+}
+
+.boxleft_bgw_left {
+    float: right;
+    width: 80%;
+    margin-top: 25%;
+}
+
+p {
+    text-align: justify;
+    line-height: 150%;
+    color: #666666;
+}
+
+button {
+    color: #993300;
+    font-size: 13pt;
+    font-weight: bold;
+    width: 50%;
+    border: 1px #993300 solid;
+    border-radius: 5px;
+    padding: 10px 0px;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+     
+}
+button:hover{
+    color: #000000;
+    background-color:rgb(234, 128, 28);
+    transition: 0,5s;
+    transform: scale(1.2);
+    transition-duration: 0.5s;
+}
+.sl{
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+h1 {
+    text-align: center;
+    font-size: 24pt;
+    margin-top: -10px;
+}
+
+h2 {
+    font-size: 18pt;
+    padding-left: 10px;
+    color: #444444;
+    
+    text-align: center;
+}
+
+.price {
+    text-align: center;
+    color: #993300;
+    font-size: 12pt;
+    float: left;
+    width: 100%;
+    padding: 8px 0px;
+}
+
+a {
+    color: #993300;
+    font-size: 13pt;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000000;
+    
+}
+
+.boxleft {
+    float: left;
+    width: 20%;
+}
+
+.boxright {
+    float: left;
+    width: 78%;
+}
+
+.mb {
+    margin-bottom: 50px;
+}
+
+.menutrai a {
+    display: block;
+    width: 100%;
+    color: #993300;
+    font-size: 13pt;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #CCC dotted;
+}
+
+.menutrai a:hover {
+    color: #000000;
+}
+
+.bgbanner {
+    float: left;
+    width: 100%;
+    padding: 80px 0px;
+    text-align: center;
+    background-image: url('../images/bgpage.jpg');
+    font-size: 14pt;
+    color: #FFFFFF;
+}
+
+.col2 {
+    width: 17%;
+    float: left;
+}
+
+.col8 {
+    float: left;
+    width: 83%;
+    text-align: right;
+}
+
+.col6 {
+    float: left;
+    width: 50%;
+}
+
+.col9 {
+    float: left;
+    width: 70%;
+}
+
+.col3 {
+    float:left;
+    width: 30%;
+}
+
+.menu {
+    height: 40px;
+    line-height: 40px;
+}
+
+.menu a {
+    margin: 0 15px;
+    
+}
+
+.logo img {
+    height: 50px ;
+    width: 120px ;
+}
+
+.imgchitiet img {
+    width: 80%;
+    border-radius: 10px; 
+}
+
+hr {
+    margin-bottom: 30px;
+    border-top: 1px #CCC dotted;
+}
+
+.viewcart table {
+    width: 95%;
+    border-collapse: collapse;
+}
+
+.viewcart table tr th {
+    background-color: #CCC;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px #666666 solid;
+    text-align: left;
+}
+h1{
+    color: rgb(255, 183, 0);
+}
+h1 span {
+    color: #993300;
+}
+.seach_ten{
+    position: relative;
+}
+i{
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 5px;
+}
+
+/* FORM */
+
+input[type=text],
+input[type=password],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+} */
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+
+/* Clear floats after the columns */
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+    .col-25,
+    .col-75,
+    input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+.ttdathang{
+    float: left;
+    width: 90%;
+    margin-bottom: 30px;
+}
+.boxcart{
+    border:1px #ccc solid;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.bggray{
+    background-color: #EEE;
+}
+.btn_dangky{
+    margin-top:10px ;
+    margin-right: 20px;
+}
+/* Footer */
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+html {
+    font-size: 100%;
+  }
+  
+  body {
+    font-family: acumin-pro, system-ui, sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    align-items: start;
+    min-height: 100vh;
+  }
+  
+.footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 30px 30px 20px 30px;
+    color: #2f2f2f;
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+  }
+  
+  .footer > * {
+    flex:  1 100%;
+  }
+  
+  .footer__addr {
+    margin-right: 1.25em;
+    margin-bottom: 2em;
+  }
+  
+  .footer__logo {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    text-transform: lowercase;
+    font-size: 1.5rem;
+  }
+  
+  .footer__addr h2 {
+    margin-top: 1.3em;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .nav__title {
+    font-weight: 400;
+    font-size: 15px;
+  }
+  
+  .footer address {
+    font-style: normal;
+    color: #999;
+  }
+  
+  .footer__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    max-width: max-content;
+    background-color: rgb(33, 33, 33, 0.07);
+    border-radius: 100px;
+    color: #2f2f2f;
+    line-height: 0;
+    margin: 0.6em 0;
+    font-size: 1rem;
+    padding: 0 1.3em;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .footer li {
+    line-height: 2em;
+  }
+  
+  .footer a {
+    text-decoration: none;
+  }
+  
+  .footer__nav {
+    display: flex;
+      flex-flow: row wrap;
+  }
+  
+  .footer__nav > * {
+    flex: 1 50%;
+    margin-right: 1.25em;
+  }
+  
+  .nav__ul a {
+    color: #999;
+  }
+  
+  .nav__ul--extra {
+    column-count: 2;
+    column-gap: 1.25em;
+  }
+  
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    color: #999;
+  }
+    
+  .legal__links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .heart {
+    color: #2f2f2f;
+  }
+  
+  @media screen and (min-width: 24.375em) {
+    .legal .legal__links {
+      margin-left: auto;
+    }
+  }
+  
+  @media screen and (min-width: 40.375em) {
+    .footer__nav > * {
+      flex: 1;
+    }
+    
+    .nav__item--extra {
+      flex-grow: 2;
+    }
+    
+    .footer__addr {
+      flex: 1 0px;
+    }
+    
+    .footer__nav {
+      flex: 2 0px;
+    }
+}
