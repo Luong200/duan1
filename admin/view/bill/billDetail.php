@@ -1,4 +1,6 @@
 <div class="main-content">
+    <div class="page-content dark:bg-zinc-700">
+            <div class="container-fluid px-[0.625rem]">
     <h3 class="title-page">
         Cập nhật đơn hàng <?php echo $billDetail['madh']; ?>
     </h3>
@@ -35,3 +37,5 @@
         <button type="submit" name="updateStatus" class="btn btn-primary">Cập nhật</button>
     </form>
 </div>
+</div>
+       
