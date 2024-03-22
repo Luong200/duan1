@@ -20,6 +20,7 @@
     $dssp_new=get_dssp_new(4);
     $dssp_best=get_dssp_best(2);
     $dssp_view=get_dssp_view(8);
+    $dscategory_view=get_cate_view();
 
 
     if(!isset($_GET['pg'])){
