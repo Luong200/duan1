@@ -38,12 +38,7 @@
                         }
                         ?>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Mã loại</th>
-                            <th>Tên danh muc</th>
-                        </tr>
-                    </tfoot>
+                    
                 </table>
             </div>
         </div>

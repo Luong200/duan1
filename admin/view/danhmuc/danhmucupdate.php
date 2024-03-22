@@ -18,7 +18,7 @@
                     </div>
                     <input type="hidden" name="id" value="<?php if(isset($id)&&($id>0)) echo $id; ?>" >
                     <div class="form-group">
-                        <input type="submit" name="capnhat" value="Cập nhật">
+                        <input type="submit" name="capnhat" value="Cập nhật" class="btn bg-violet-500 border-transparent text-white font-medium w-28 hover:bg-violet-700 focus:bg-violet-700 focus:ring focus:ring-violet-50">
                         <!-- <button type="submit" name="capnhat" class="btn btn-primary">Cập nhật danh muc</button> -->
                     </div>
                     
