@@ -25,7 +25,7 @@
                 if(isset($_POST['btnadd'])){
                     $name=$_POST['name'];
                     danhmuc_insert($name);
-                    $tb="Đã thêm danh mục thành công!";
+                    $tb="<script>alert('Đã thêm danh mục thành công!')</script>";
                     
                 }
                 // $sanphamlist=get_dssp_new(100);
@@ -55,7 +55,7 @@
                     $name=$_POST['name'];
                     $id=$_POST['id'];
                     update_danhmuc($id,$name);
-                    $thongbao="Cập nhật thành công";
+                    $thongbao="<script>alert('Đã cập nhật danh mục thành công!')</script>";
                 }
     
                 $listdanhmuc=loadall_danhmuc();
