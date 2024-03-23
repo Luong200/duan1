@@ -14,7 +14,7 @@
                 <a href="#">Thoát hệ thống</a>
             </div>
             <div class="boxright">
-                <h1>ĐĂNG KÝ</h1><br>
+                <!-- <h1>ĐĂNG KÝ</h1><br> -->
                 <div class="containerfull mr30">
                 <form action="index.php?pg=adduser" method="post">
                      <div class="row">

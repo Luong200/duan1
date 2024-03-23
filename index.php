@@ -14,13 +14,13 @@
     include "dao/sanpham.php";
     include "dao/giohang.php";
     include "dao/donhang.php";
-    include "view/header.php";
 
     //data dành cho trang chủ
     $dssp_new=get_dssp_new(4);
     $dssp_best=get_dssp_best(2);
     $dssp_view=get_dssp_view(8);
     $dscategory_view=get_cate_view();
+    include "view/header.php";
 
 
     if(!isset($_GET['pg'])){
@@ -54,10 +54,11 @@
                 break;
             case 'sanphamchitiet':
                 $dsdm=danhmuc_all();
+                
                 if(isset($_GET["id"])&&($_GET["id"])>0){
                     $id=$_GET["id"];
                     $iddm=get_iddm($id);
-                    $dssp_lienquan=get_dssp_lienquan($iddm, $id,4);
+                    $dssp_lienquan=get_dssp_lienquan($iddm, $id);
                     $spchitiet=get_sanphamchitiet($id);
                     include "view/sanphamchitiet.php";
                 }else{

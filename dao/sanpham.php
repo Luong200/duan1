@@ -82,9 +82,9 @@ function get_img($id)
     return $getimg['img'];
 }
 
-function get_dssp_lienquan($iddm, $id, $limi)
+function get_dssp_lienquan($iddm, $id)
 {
-    $sql = "SELECT * FROM sanpham WHERE iddm=? AND id<>? ORDER BY id DESC limit " . $limi;
+    $sql = "SELECT * FROM sanpham WHERE iddm=? AND id = ? ORDER BY id DESC " ;
     return pdo_query($sql, $iddm, $id);
 }
 
@@ -224,7 +224,15 @@ function showcategory($dscate)
     }
     return $html_dssp;
 }
-
+function showcategoryHeader($dscate)
+{
+    $html_dssp = '';
+    foreach ($dscate as $sp) {
+        extract($sp);
+        $html_dssp .= ' <Option><a href="#!"><img src="layout/assets/img/icon/cat_04.svg" alt="">' . $name . '</a></Option>';
+    }
+    return $html_dssp;
+}
 ///////////////////////// ÂDMIN//////////
 function showsp_admin($dssp)
 {

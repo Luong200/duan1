@@ -1,67 +1,138 @@
-<?php
-    $html_dm=showdm($dsdm);
-    $html_sp_lienquan=showsp($dssp_lienquan);
-    extract($spchitiet);
-?>
-<div class="containerfull">
-        <h4><div class="bgbanner" style="color: brown; font-size:larger">SẢN PHẨM CHI TIẾT</div></h4>
+<!-- breadcrumb start -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="radios-breadcrumb breadcrumbs">
+            <ul class="list-unstyled d-flex align-items-center">
+                <li class="radiosbcrumb-item radiosbcrumb-begin">
+                    <a href="index.html"><span>Home</span></a>
+                </li>
+                <li class="radiosbcrumb-item radiosbcrumb-end">
+                    <span>Product Detail</span>
+                </li>
+            </ul>
+        </div>
     </div>
+</section>
+<!-- breadcrumb end -->
 
-    <section class="containerfull">
-        <div class="container">
-            <div class="boxleft mr2pt menutrai">
-                <h1>DANH MỤC</h1><br><br>
-                <?=$html_dm?>
-            </div>
-            <div class="boxright">
-                <h1>SẢN PHẨM CHI TIẾT</h1><br>
-                <div class="containerfull mr30">
-                    <div class="col6 imgchitiet">
-                        <img src="layout/images/<?=$img?>" alt="" >
+<!-- start shop-single-section -->
+<section class="shop-single-section pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-single-wrap mb-30">
+                    <div class="product_details_img ">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="pl_thumb">
+                                    <img src="./uploads/<?php echo $spchitiet['img'] ?>" alt="">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col6 textchitiet">
-                        <h2><?=$name?></h2>
-                        <h3 style="color: red;font-size:20px;">Giá: <?=$price?> VNĐ</h3>
-                        <h4>Mô tả: <?=$mota?></h4>
-                        <form action="index.php?pg=addcart" method="post">
-                            <input type="hidden" name="name" value="<?=$name?>">
-                            <input type="hidden" name="img" value="<?=$img?>">
-                            <input type="hidden" name="price" value="<?=$price?>">
-                            SỐ LƯỢNG: <input class="sl" type="number" name="soluong" id="" min="1" value="1" max="10"> <br>
-                            <div class="btn_dathang" style="text-align: center; margin-top:20px;"><button  type="submit" name="addcart" >Đặt hàng</button></div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 product-details-col">
+                <div class="product-details">
+                    <h2><?php echo $spchitiet['name'] ?></h2>
+
+                    <div class="price">
+                        <span class="current"><?php echo $spchitiet['price'] ?></span>
+
+                    </div>
+
+
+
+                    <div class="thb-product-meta-before mt-20">
+                        <div class="product_meta">
+                            <span class="posted_in">Categories: <a href="#!">Samsung</a>, <a href="#!">Apple</a>, <a href="#!">Huawei</a></span>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="product-option">
+                        <form class="form">
+                            <div class="product-row">
+                                <div>
+                                    <input class="product-count" type="text" value="1" name="product-count">
+                                </div>
+                                <div class="add-to-cart-btn">
+                                    <button class="thm-btn thm-btn__2 no-icon" type="submit">
+                                        <span class="btn-wrap">
+                                            <span>Shop Now</span>
+                                            <span>Shop Now</span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
+
                 </div>
-                <hr>
-                <h1>SẢN PHẨM LIÊN QUAN</h1>
-                <div class="containerfull mr30">
-                    <?=$html_sp_lienquan;?>
-                    <!-- <div class="box25 mr15 mb">
-                        <div class="best"></div>
-                        <img src="layout/layout/images/sp1.webp" alt="">
-                        <span class="price">$1000</span>
-                        <button>Đặt hàng</button>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="single-product-info">
+                    <!-- Nav tabs -->
+                    <div class="tablist">
+                        <ul class="nav nav-tabs" id="pills-tab" role="tablist">
+                            <li><button class="active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#tb-01">Product Details</button></li>
+
+                        </ul>
                     </div>
-                    <div class="box25 mr15 mb">
-                        <img src="layout/images/sp2.webp" alt="">
-                        <span class="price">$1000</span>
-                        <button>Đặt hàng</button>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="tb-01">
+                            <p><?php echo $spchitiet['mota'] ?></p>
+                        </div>
+
                     </div>
-                    <div class="box25 mr15 mb">
-                        <img src="layout/images/sp3.webp" alt="">
-                        <span class="price">$1000</span>
-                        <button>Đặt hàng</button>
-                    </div>
-                    <div class="box25 mr15 mb">
-                        <img src="layout/images/sp4.webp" alt="">
-                        <span class="price">$1000</span>
-                        <button>Đặt hàng</button>
-                    </div> -->
-                    
                 </div>
             </div>
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="realted-porduct">
+                    <h3>Related product</h3>
+                    <div class="shop-area">
+                        <ul class="products clearfix">
+                            <?php foreach ($dssp_lienquan as $item) {
+                            ?>
+                                <li class="product">
+                                    <div class="product-holder">
+                                        <a href="shop-single.html"><img src="./uploads/<?php echo $item['img'] ?>" alt="" class="h-75"></a>
+
+                                    </div>
+                                    <div class="product-info">
+                                    <h4><a href="index.php?pg=sanphamchitiet&id=<?php echo $item['id']?>"><?php echo $item['name'] ?></a> </h4>
+                                        <span class="product__available">Available: <span>334</span></span>
+                                        <div class="product__progress progress color-primary">
+                                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h4 class="product__price"><span class="new"><?php echo $item['price'] ?></span></h4>
+                                        <p class="product-description"><?php echo $item['mota'] ?> </p>
+                                    </div>
+                                </li>
+                            <?php
+                            } ?>
 
 
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+
+    </div> <!-- end of container -->
+</section>
+<!-- end of shop-single-section -->

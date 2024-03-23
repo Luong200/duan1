@@ -4,7 +4,15 @@
     $html_dssp_best=showsp($dssp_best);
     $html_dssp_view=showsp($dssp_view);
     $html_dscate_view=showcategory($dscategory_view);
+    if(isset($_SESSION['s_user'])&&(count($_SESSION['s_user'])>0)){
+        extract($_SESSION['s_user']);
+//        '<span ><a href="index.php?pg=myaccount">'.$username.'</a></span>
+//        <a href="index.php?pg=logout">Thoát</a>'
+        $html_account=  '<a  href="index.php?pg=myaccount" class="text-white">'.$username.'</a>/<a class="text-white" href="index.php?pg=logout">Thoát</a>';
 
+    }else{
+        $html_account='<span class="d-flex"><a  href="index.php?pg=dangky" class="text-black">Login -</a><a class="text-black" href="index.php?pg=dangnhap">Sign Up</a></span>';
+    }
 
 ?>
 <!-- slide-bar start -->
@@ -97,41 +105,28 @@
             </form>
         </div>
         <ul id="mobile-menu-active">
-            <li class="dropdown"><a href="index.html">Home</a>
-                <ul class="sub-menu">
-                    <li><a href="index.html">Home One</a></li>
-                    <li><a href="home-2.html">Home Two</a></li>
-                    <li><a href="home-3.html">Home Three</a></li>
-                </ul>
+            <li class=""><a href="index.html">Home</a>
+                
             </li>
-            <li class="dropdown">
+            <li class="">
                 <a href="#">Shop</a>
-                <ul class="sub-menu">
-                    <li><a href="shop.html">Shop Default</a></li>
-                    <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                    <li><a href="shop-single.html">Shop Single</a></li>
-                    <li><a href="cart.html">Shop Cart</a></li>
-                    <li><a href="checkout.html">Shop Checkout</a></li>
-                    <li><a href="account.html">Account</a></li>
-                </ul>
+                
             </li>
-            <li><a href="shop.html">Accesories</a></li>
-            <li class="dropdown">
+            <li class="">
                 <a href="#!">Blog</a>
-                <ul class="sub-menu">
-                    <li><a href="news.html">Blog</a></li>
-                    <li><a href="news-single.html">Blog Details</a></li>
-                </ul>
+                
             </li>
-            <li class="dropdown">
+            <!-- <li class="dropdown">
                 <a href="#!">Pages</a>
                 <ul class="submenu">
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="about.html">Account</a></li>
                     <li><a href="404.html">404</a></li>
                 </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
+            </li> -->
+            <!-- <li><a href="contact.html">Contact</a></li> -->
+            <li><?=$html_account;?></li>
+            
         </ul>
     </nav>
     <!-- side-mobile-menu end -->
@@ -1308,9 +1303,9 @@
     <!-- brand end -->
 
 </main>
-<?=$html_dssp_best?>
+<!--  //$html_dssp_best -->
 
-<?=$html_dssp_view?>
+<!-- $html_dssp_view -->
     <script>
 
 let slideIndex = 0;
