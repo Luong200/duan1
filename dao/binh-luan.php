@@ -1,44 +1,52 @@
 <?php
-require_once 'pdo.php';
+    
+    function insert_binhluan($noidung, $iduser, $idpro, $ngaybinhluan){
+        $sql = "insert into binhluan(noidung, iduser, idpro, ngaybinhluan) values ('$noidung','$iduser','$idpro','$ngaybinhluan')";
+        pdo_execute($sql);
+    }
 
-function binh_luan_insert($ma_kh, $ma_hh, $noi_dung, $ngay_bl){
-    $sql = "INSERT INTO binh_luan(ma_kh, ma_hh, noi_dung, ngay_bl) VALUES (?,?,?,?)";
-    pdo_execute($sql, $ma_kh, $ma_hh, $noi_dung, $ngay_bl);
-}
-
-function binh_luan_update($ma_bl, $ma_kh, $ma_hh, $noi_dung, $ngay_bl){
-    $sql = "UPDATE binh_luan SET ma_kh=?,ma_hh=?,noi_dung=?,ngay_bl=? WHERE ma_bl=?";
-    pdo_execute($sql, $ma_kh, $ma_hh, $noi_dung, $ngay_bl, $ma_bl);
-}
-
-function binh_luan_delete($ma_bl){
-    $sql = "DELETE FROM binh_luan WHERE ma_bl=?";
-    if(is_array($ma_bl)){
-        foreach ($ma_bl as $ma) {
-            pdo_execute($sql, $ma);
+    function loadall_binhluan($idpro){
+        $sql = "SELECT bl.*, u.hoten AS ten_nguoidung
+                FROM binhluan bl
+                LEFT JOIN user u ON bl.iduser = u.id
+                WHERE 1";
+        if($idpro > 0) {
+            $sql .= " AND bl.idpro = '".$idpro."'";
         }
+        $sql .= " ORDER BY bl.id DESC";
+        $listbl = pdo_query($sql);
+        return $listbl;
     }
-    else{
-        pdo_execute($sql, $ma_bl);
-    }
+    
+
+function loadone_binhluan($idBl){
+    $sql="select * from binhluan where id=".$idBl;
+    $bl=pdo_query_one($sql);
+    return $bl ;
 }
 
-function binh_luan_select_all(){
-    $sql = "SELECT * FROM binh_luan bl ORDER BY ngay_bl DESC";
+function updatebl($id,$noidung){
+    $sql="update binhluan set noidung='".$noidung."' where id=".$id;
+    pdo_execute($sql);
+}
+
+
+function delete_binhluan($id){
+    $sql = "DELETE FROM  binhluan WHERE id=".$id;
+    pdo_execute($sql);
+}
+function binhluan_all(){
+    $sql = "SELECT u.hoten, b.iduser, b.noidung, b.ngaybinhluan, b.id,b.ngaybinhluan, sp.name AS ten_sanpham
+            FROM user u
+            INNER JOIN binhluan b ON u.id = b.iduser
+            INNER JOIN sanpham sp ON b.idpro = sp.id";
+            
     return pdo_query($sql);
 }
 
-function binh_luan_select_by_id($ma_bl){
-    $sql = "SELECT * FROM binh_luan WHERE ma_bl=?";
-    return pdo_query_one($sql, $ma_bl);
-}
-
-function binh_luan_exist($ma_bl){
-    $sql = "SELECT count(*) FROM binh_luan WHERE ma_bl=?";
-    return pdo_query_value($sql, $ma_bl) > 0;
-}
-//-------------------------------//
-function binh_luan_select_by_hang_hoa($ma_hh){
-    $sql = "SELECT b.*, h.ten_hh FROM binh_luan b JOIN hang_hoa h ON h.ma_hh=b.ma_hh WHERE b.ma_hh=? ORDER BY ngay_bl DESC";
-    return pdo_query($sql, $ma_hh);
+function binhluan_user(){
+    $sql= "SELECT u.username, b.iduser 
+    FROM user u
+    INNER JOIN binhluan b ON u.id = b.iduser";
+    return pdo_query($sql);
 }

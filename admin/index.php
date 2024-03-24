@@ -15,7 +15,10 @@ include "../dao/danhmuc.php";
 include "../dao/sanpham.php";
 include "../dao/product_variants.php";
 include "../dao/donhang.php";
+include "../dao/binh-luan.php";
+
 include "../dao/user.php";
+
 
 include "view/header.php";
 if (isset($_GET["pg"])) {
@@ -324,6 +327,20 @@ if (isset($_GET["pg"])) {
             break;
 //////////////////////////END USER//////////////////////////////////    
 //////////////////////////Bill/////////////////////////////
+            case 'binhluan': 
+                $listbinhluan = binhluan_all();
+                // print_r($listbinhluan);
+                // die();
+                include "./view/binhluan/binhluanlist.php";
+                break;
+            case 'binhluan_delete':
+                if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                    $id = $_GET['id'];
+                    delete_binhluan($_GET['id']);
+                }
+                $listbinhluan = binhluan_all();
+                include "./view/binhluan/binhluanlist.php";
+                break;
         case 'listbill':
             $listbill = loadall_bill();
             include "./view/bill/billlist.php";
