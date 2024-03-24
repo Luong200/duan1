@@ -91,7 +91,7 @@
                     <div class="tablist">
                         <ul class="nav nav-tabs" id="pills-tab" role="tablist">
                             <li><button class="active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#tb-01">Product Details</button></li>
-
+                            <li><button  id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#tb-03">Review (09)</button></li>
                         </ul>
                     </div>
 
@@ -100,6 +100,9 @@
                         <div class="tab-pane fade show active" id="tb-01">
                             <p><?php echo $spchitiet['mota'] ?></p>
                         </div>
+                        <div class="tab-pane fade" id="tb-03" >
+            <iframe src="view/binhluan.php?idpro=<?=$id?>" frameborder="0" width="100%" height="300px"></iframe>
+        </div>
 
                     </div>
                 </div>
