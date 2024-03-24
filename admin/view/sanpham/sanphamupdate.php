@@ -46,6 +46,13 @@
                             <input type="text" name="price" value="<?=($price>0)? $price : '';?>" id="price" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" placeholder="Nhập giá gốc">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="price">Số lượng:</label>
+                        <div class="input-group mb-3">
+                            <input type="text" name="soluong" value="<?= $soluong ;?>" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" placeholder="Nhập số lượng">
+                        </div>
+                    </div>
                     <div class="form-group"  <?php  echo count($colorsData) > 0 ?  'hidden' : ''; ?>>
                         <label for="price_sale">Giá khuyến mãi:</label>
                         <div class="input-group mb-3">

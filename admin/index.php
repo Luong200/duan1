@@ -86,6 +86,8 @@ if (isset($_GET["pg"])) {
                 $color = $_POST['color'];
                 $size = $_POST['size'];
                 $prices = $_POST['prices'];
+                $soluong = $_POST['soluong'];
+
                 $img = time() . '_' . basename($_FILES["img"]["name"]);
 
                            if(!empty($name) && !empty($mota) && !empty($iddm)  ) {
@@ -98,8 +100,7 @@ if (isset($_GET["pg"])) {
                                    $img = "";
                                }
                                if(!empty($size) && !empty($color) && !empty($prices)){
-
-                                      sanpham_update($name, $img, 0, $mota, $iddm, $id);
+                                      sanpham_update($name, $img, 0, $mota, $iddm, $id,$soluong);
                                       varible_delete($id);
                                       $colors = json_decode($color);
                                       $size = json_decode($size);
@@ -119,7 +120,7 @@ if (isset($_GET["pg"])) {
                                           echo "<script>alert('Bạn cần xem lại giá tiền biến thể có đủ hoặc thừa không ?')</script>";
                                       }
                                   }else {
-                                      sanpham_update($name, $img, $price, $mota, $iddm, $id);
+                                      sanpham_update($name, $img, $price, $mota, $iddm, $id,$soluong);
                                   }
 
                                //Insert into
@@ -196,11 +197,12 @@ if (isset($_GET["pg"])) {
                 $size = $_POST['size'];
                 $prices = $_POST['prices'];
                 $mota = $_POST['mota'];
+                $soluong = $_POST['soluong'];
                 $iddm = $_POST['iddm'] == 0 ? '' : $_POST['iddm'];
                 $img = time() . '_' . basename($_FILES["img"]["name"]);
-                if(!empty($name) && !empty($price) && !empty($mota) && !empty($iddm)  && !empty($img) ) {
+                if(!empty($name) && !empty($price) && !empty($mota) && !empty($iddm)  && !empty($img) && !empty($soluong) ) {
                     if(!empty($size) && !empty($color) && !empty($prices)){
-                        $id = sanpham_insert($name, $img, 0, $mota, $iddm);
+                        $id = sanpham_insert($name, $img, 0, $mota, $iddm,$soluong);
                         $colors = json_decode($color);
                         $size = json_decode($size);
                         $prices = json_decode($prices);
@@ -220,7 +222,7 @@ if (isset($_GET["pg"])) {
                         }
 
                     }else {
-                        $id = sanpham_insert($name, $img, $price, $mota, $iddm);
+                        $id = sanpham_insert($name, $img, $price, $mota, $iddm,$soluong);
                     }
                     //Insert into
 

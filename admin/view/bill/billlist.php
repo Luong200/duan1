@@ -33,6 +33,7 @@
                                     <thead>
                                         <tr>
                                         
+                                            <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600">ID</th>
                                             <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600">Mã đơn hàng</th>
                                              <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600 border-l-0">ID người dùng</th>
                                             <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600 border-l-0">Tên người đặt</th>
@@ -53,6 +54,7 @@
                     //    $countsp= loadall_cart_count($bill["id"]);
                     ?>
                         <tr>
+                            <td class="p-4 pr-8 border border-t-0 border-gray-50 dark:border-zinc-600" ><?php echo $id?></td>
                             <td class="p-4 pr-8 border border-t-0 border-gray-50 dark:border-zinc-600" ><?php echo $madh?></td>
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $iduser?></td>
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $nguoidat_ten?></td>

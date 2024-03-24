@@ -1,6 +1,3 @@
-<div class="containerfull">
-        <div class="bgbanner">DƠN HÀNG</div>
-    </div>
 
     <section class="containerfull">
         <div class="container">

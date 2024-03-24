@@ -1,21 +1,22 @@
 <?php
 require_once 'pdo.php';
 //Them san pham
-function sanpham_insert($name, $img, $price, $mota, $iddm)
+function sanpham_insert($name, $img, $price, $mota, $iddm,$soluong)
 {
-    $sql = "INSERT INTO sanpham(name, img, price,mota, iddm) VALUES (?,?,?,?,?)";
-    return pdo_execute_id($sql, $name, $img, $price, $mota, $iddm);
+    $sql = "INSERT INTO sanpham(name, img, price,mota, iddm,soluong) VALUES (?,?,?,?,?,?)";
+    return pdo_execute_id($sql, $name, $img, $price, $mota, $iddm,$soluong);
 }
 
-function sanpham_update($name, $img, $price, $mota, $iddm, $id)
+function sanpham_update($name, $img, $price, $mota, $iddm, $id,$soluong)
 {
     if ($img != "") {
-        $sql = "UPDATE sanpham SET name=?,img=?, price=?,mota=?,iddm=? WHERE id=?";
-
-        pdo_execute($sql, $name, $img, $price, $mota, $iddm, $id);
+        $sql = "UPDATE sanpham SET name=?,img=?, price=?,mota=?,iddm=?,soluong=? WHERE id=?";
+        pdo_execute($sql, $name, $img, $price, $mota, $iddm,$soluong, $id);
     } else {
-        $sql = "UPDATE sanpham SET name=?, price=?,mota=?,iddm=? WHERE id=?";
-        pdo_execute($sql, $name, $price, $mota, $iddm, $id);
+        $sql = "UPDATE sanpham SET name=?, price=?,mota=?,iddm=?,soluong=?  WHERE id=?";
+        echo $sql;
+        die();
+        pdo_execute($sql, $name, $price, $mota, $iddm,$soluong, $id);
     }
 }
 
@@ -35,7 +36,13 @@ function sanpham_delete($id)
 
 function get_dssp_new($limi)
 {
-    $sql = "SELECT * FROM sanpham ORDER BY id DESC limit " . $limi;
+    $sql = "SELECT s.id, s.name, s.img, s.price, s.view, s.mota, s.bestseller, s.iddm, s.soluong , MIN(v.price) AS gia_thap_nhat, MAX(v.price) AS gia_cao_nhat
+FROM sanpham s
+LEFT JOIN product_variants v ON s.id = v.product_id
+GROUP BY s.id, s.name
+ORDER BY s.id DESC
+LIMIT ". $limi;
+;
     return pdo_query($sql);
 }
 
@@ -68,6 +75,12 @@ function get_dssp($kyw, $iddm, $limi)
     }
     $sql .= " ORDER BY id DESC limit " . $limi;
     return pdo_query($sql);
+}
+
+function get_cate_view_one($id)
+{
+    $sql = "SELECT * FROM danhmuc WHERE id=?";
+    return pdo_query_one($sql,$id);
 }
 
 function get_sanphamchitiet($id)
@@ -247,17 +260,26 @@ function showsp_admin($dssp)
             $best = '';
         }
         $html_dssp .= '<tr>
-                        <td>' . $i . '</td>
-                        <td><img src="' . IMG_PATH_ADMIN . $img . '" alt="' . $name . '" width="80"/></td>
-                        <td>' . $name . '</td>
-                        <td>' . $price . 'VNĐ</td>
-                        <td>' . $view . '</td>
-                        
-                        <td>
-                        <a href="index.php?pg=sanphamupdate&id=' . $id . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
-                        <a href="index.php?pg=sanphamdelete&id=' . $id . '" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Xóa</a>
-                        </td>
-                    </tr> ';
+                    <td>' . $i . '</td>
+                    <td><img src="' . IMG_PATH_ADMIN . $img . '" alt="' . $name . '" width="80"/></td>
+                    <td>' . $name . '</td>
+                    <td>';
+        $priceGiathap = empty($gia_thap_nhat) ? $price : $gia_thap_nhat;
+        $priceGiacao = empty($gia_cao_nhat) ? $price : $gia_cao_nhat;
+        if(is_null($priceGiathap) && is_null($priceGiacao)){
+            $html_dssp .= number_format($price);
+        } else {
+            $html_dssp .= number_format($priceGiathap) . ' - ' . number_format($priceGiacao);
+        }
+        $html_dssp .= ' VNĐ</td>
+                    <td>' . $soluong . '</td>
+                    <td>' . $view . '</td>
+
+                    <td>
+                    <a href="index.php?pg=sanphamupdate&id=' . $id . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
+                    <a href="index.php?pg=sanphamdelete&id=' . $id . '" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Xóa</a>
+                    </td>
+                </tr>';
         $i++;
     }
     return $html_dssp;

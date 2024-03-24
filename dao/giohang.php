@@ -1,8 +1,8 @@
 <?php
 //inser vao table cart
-function cart_insert($idpro, $price, $name, $img, $soluong, $thanhtien,$idbill){
-    $sql = "INSERT INTO cart(idpro, price, name , img,soluong,thanhtien,idbill) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    pdo_execute($sql, $idpro, $price, $name, $img, $soluong, $thanhtien,$idbill);
+function cart_insert($idpro, $price, $name, $img, $soluong, $thanhtien,$idbill,$id_variants){
+    $sql = "INSERT INTO cart(idpro, price, name , img,soluong,thanhtien,idbill,id_variants) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+    pdo_execute($sql, $idpro, $price, $name, $img, $soluong, $thanhtien,$idbill,$id_variants);
 }
     function viewcart(){
         $html_cart='';

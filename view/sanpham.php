@@ -104,7 +104,7 @@
                                         <div class="product-info">
 
                                             <h2 class="product__title"><a href="index.php?pg=sanphamchitiet&id=<?php echo $item['id'] ?>"><?php echo $item['name'] ?></a></h2>
-                                            <span class="product__available">Available: <span>334</span></span>
+                                            <span class="product__available">Số lượng: <span><?php echo $item['soluong']?></span></span>
                                             <div class="product__progress progress color-primary">
                                                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>

@@ -40,40 +40,54 @@
                     <h2><?php echo $spchitiet['name'] ?></h2>
 
                     <div class="price">
-                        <span class="current"><?php echo $spchitiet['price'] ?></span>
-
+                        <span class="current" id="priceCurrent"><?php echo count($varibleAll) > 0 ? number_format($varibleAll[0]['price']) : number_format($spchitiet['price']) ?> VND</span>
                     </div>
 
 
 
                     <div class="thb-product-meta-before mt-20">
                         <div class="product_meta">
-                            <span class="posted_in">Categories: <a href="#!">Samsung</a>, <a href="#!">Apple</a>, <a href="#!">Huawei</a></span>
-
-
-
+                            <span class="posted_in">Categories: <a href="#"><?php echo $danhmuc['name']; ?></a></span>
+                            <span class="posted_in">Số lượng còn lại: <a href="#"><?php echo $spchitiet ['soluong']; ?> Sản phẩm</a></span>
                         </div>
                     </div>
 
-                    <div class="product-option">
+                    <div class="product-option m-0">
                             <div class="product-row">
-                                <div>
-                                    <input class="product-count" type="text" value="1" name="product-count">
-                                </div>
-                                <div class="add-to-cart-btn">
-                                    <form action="index.php?pg=addcart" method="post">
+                                <div class="add-to-cart-btn w-100">
+                                    <form action="index.php?pg=addcart" class="d-flex flex-column " method="post">
+
                                         <input type="hidden" name="idpro" value="<?php echo $spchitiet['id'] ?>">
                                         <input type="hidden" name="name" value="<?php echo $spchitiet['name'] ?>">
                                         <input type="hidden" name="img" value="<?php echo $spchitiet['img'] ?>">
-                                        <input type="hidden" name="price" value="<?php echo $spchitiet['price'] ?>">
+                                        <input type="hidden" name="price" id="priceAdd" value="<?php echo $spchitiet['price'] ?>">
                                         <input type="hidden" name="mota" value="<?php echo $spchitiet['mota'] ?>">
-                                        <input type="hidden" name="soluong" value="1">
-                                        <div class="btn_dathang" >  <button class="thm-btn thm-btn__2 no-icon" name="addcart" type="submit">
-                                        <span class="btn-wrap">
-                                            <span>Shop Now</span>
-                                            <span>Shop Now</span>
-                                        </span>
-                                            </button></div>
+                                        <input class="form-check-input" id="nameVarible" type="hidden" name="nameVarible">
+                                        <div class="d-flex align-items-center my-2 ">
+                                            <?php foreach ($varibleAll as $key => $value){?>
+                                            <div class="form-check <?php echo $key > 0 ? 'ms-2' : ''; ?>">
+                                                <input class="form-check-input priceProducts" data-nameVarible="<?php echo $value['color'] . '-' . $value['size'] ;?>" data-price="<?php echo $value['price'] ?>" value="<?php echo $value['id'] ?>" type="radio"  <?php echo $key == 0 ? 'checked' : ''; ?> name="varible" id="flexRadioDefault<?php echo $key ?>">
+                                                <label class="form-check-label" for="flexRadioDefault<?php echo $key ?>">
+                                                    <?php echo $value['color'] . '-' . $value['size'] ;?>
+                                                </label>
+                                            </div>
+                                            <?php } ?>
+
+                                        </div>
+                                        <div class="btn_dathang d-flex"  >
+                                            <div><input class="product-count" type="text"  name="soluong" value="1"></div>
+                                            <div>
+                                                <?php if($spchitiet ['soluong'] == 0){?>
+                                                <button class="thm-btn p-2 btn-danger" type="button" disabled>
+                                                    Đã Hết hàng
+                                                </button>
+                                                <?php }else{?>
+                                                <button class="thm-btn p-2" name="addcart"  type="submit">
+                                                    Add To Cart
+                                                </button>
+                                                <?php }?>
+                                            </div>
+                                            </div>
                                     </form>
                                 </div>
                             </div>
@@ -141,4 +155,43 @@
 
     </div> <!-- end of container -->
 </section>
+
+
+<script>
+    const priceProducts = document.querySelectorAll('.priceProducts');
+    const priceCurrent = document.querySelector('#priceCurrent');
+    const nameVarible = document.querySelector('#nameVarible');
+    const priceAdd = document.querySelector('#priceAdd');
+    nameVarible.value = priceProducts[0].getAttribute('data-nameVarible');
+    priceAdd.value = priceProducts[0].getAttribute('data-price');
+    priceProducts.forEach((priceProduct) => {
+        priceProduct.addEventListener('change', (e) => {
+            const price = e.target.dataset.price;
+            nameVarible.value = e.target.getAttribute('data-nameVarible');
+            priceAdd.value = price;
+            priceCurrent.innerText = numberFormat(price, 0, '.', ',') + ' VND';
+        })
+    })
+
+    function numberFormat(number, decimals, decPoint, thousandsSep) {
+        // Mặc định các tham số
+        decimals = decimals !== undefined ? decimals : 0;
+        decPoint = decPoint !== undefined ? decPoint : '.';
+        thousandsSep = thousandsSep !== undefined ? thousandsSep : ',';
+
+        // Chuyển đổi số sang chuỗi
+        number = parseFloat(number).toFixed(decimals);
+
+        // Tách phần nguyên và phần thập phân
+        var parts = number.split('.');
+        var intPart = parts[0];
+        var decimalPart = parts.length > 1 ? decPoint + parts[1] : '';
+
+        // Thêm dấu ngăn cách hàng nghìn
+        intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSep);
+
+        return intPart + decimalPart;
+    }
+
+</script>
 <!-- end of shop-single-section -->

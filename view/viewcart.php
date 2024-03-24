@@ -1,40 +1,42 @@
 <?php
-    $html_cart='';
-    $i=0;
-    foreach ($_SESSION['giohang'] as $key => $sp) {
-        extract($sp);
-        $tt=(Int)$price*(Int)$soluong;
-        $xoasp='<a href="index.php?pg=delcart&idcart='.$i.'"><input type="button" value="Xóa"></a>';
+$html_cart = '';
+$i = 0;
+foreach ($_SESSION['giohang'] as $key => $sp) {
+    extract($sp);
+    $tt = (int)$price * (int)$soluong;
+    $xoasp = '<a href="index.php?pg=delcart&idcart=' . $i . '"><input type="button" value="Xóa"></a>';
 
 
-        $html_cart.=' <tr class="cart_single">
+    $html_cart .= ' <tr class="cart_single">
                                     <td class="product-remove">
-                                      '.$idpro.'
+                                      ' . $idpro . '
                                     </td>
                                     <td class="product-thumbnail">
                                         <a href="#!">
-                                            <img width="57" height="70" src="'.IMG_PATH_USER.$img.'"
+                                            <img width="57" height="70" src="' . IMG_PATH_USER . $img . '"
                                                  class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="#!"  />
                                         </a>
                                     </td>
                                     <td class="product-name" data-title="Product">
-                                        <a href="#!">'.$name.'</a> </td>
+                                        <a href="#!">' . $name;
+    $name_varible = isset($name_varible) && !empty($name_varible) ? '(' . $name_varible . ')' : '';
+    $html_cart .= $name_varible . '</a> </td>
 
                                     <td class="product-price" data-title="Price">
-                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span>'.number_format($price).'VND</span>
+                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span>' . number_format($price) . 'VND</span>
                                     </td>
                                     
-                                                                 <td><button type="button" onclick="giam(this,'.$i.')">  - </button> <span>'.$soluong.' </span><button  type="button"  onclick="tang(this,'.$i.')"> + </button></td>
+                                                                 <td><button type="button" onclick="giam(this,' . $i . ')">  - </button> <span>' . $soluong . ' </span><button  type="button"  onclick="tang(this,' . $i . ')"> + </button></td>
                                     <td class="product-subtotal" data-title="Total">
-                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span>'. number_format($price* $soluong).' VND</span>
+                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span>' . number_format($price * $soluong) . ' VND</span>
                                     </td>
                                     
                                     <td class="product-subtotal" data-title="Total">
-                              '.$xoasp.'
+                              ' . $xoasp . '
                                     </td>
                                 </tr>';
-        $i+=1;
-    }
+    $i += 1;
+}
 ?>
 
 <main>
@@ -68,15 +70,15 @@
                                 <tr>
                                     <th class="product-thumbnail">STT</th>
                                     <th class="product-thumbnail">Hình Ảnh</th>
-                                    <th class="product-name">	Tên sản phẩm</th>
-                                    <th class="product-price">	Đơn giá</th>
-                                    <th class="product-quantity">	Số lượng</th>
-                                    <th class="product-subtotal">	Thành tiền</th>
+                                    <th class="product-name"> Tên sản phẩm</th>
+                                    <th class="product-price"> Đơn giá</th>
+                                    <th class="product-quantity"> Số lượng</th>
+                                    <th class="product-subtotal"> Thành tiền</th>
                                     <th class="product-remove">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?=$html_cart?>
+                                <?= $html_cart ?>
 
 
                                 <tr>
@@ -84,8 +86,9 @@
                                         <div class="coupon">
                                             <label for="coupon_code">Vocher:</label>
                                             <form action="index.php?pg=viewcart&voucher=1" method="post">
-                                                <input type="hidden" name="tongdonhang" value="<?=$tongdonhang?>">
-                                                <input type="text" name="mavoucher" class="input-text" id="coupon_code" value="" placeholder="Nhập voucher" />
+                                                <input type="hidden" name="tongdonhang" value="<?= $tongdonhang ?>">
+                                                <input type="text" name="mavoucher" class="input-text" id="coupon_code"
+                                                       value="" placeholder="Nhập voucher"/>
                                                 <button class="thm-btn thm-btn__2 br-0 no-icon" type="submit">
                                                             <span class="btn-wrap">
                                                                 <span>Apply Coupon</span>
@@ -96,8 +99,8 @@
 
                                         </div>
 
-                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="918724a9c2" />
-                                        <input type="hidden" name="_wp_http_referer" value="/wp/?page_id=5" />
+                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="918724a9c2"/>
+                                        <input type="hidden" name="_wp_http_referer" value="/wp/?page_id=5"/>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -110,12 +113,16 @@
                                 <table class="shop_table shop_table_responsive">
                                     <tr class="order-total">
                                         <th>Tổng thanh toán</th>
-                                        <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span> <?=number_format($thanhtoan) ?> VND  </span></strong> </td>
+                                        <td data-title="Total"><strong><span
+                                                        class="woocommerce-Price-amount amount"><span
+                                                            class="woocommerce-Price-currencySymbol"></span> <?= number_format($thanhtoan) ?> VND  </span></strong>
+                                        </td>
                                     </tr>
                                 </table>
 
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="index.php?pg=bill" class="checkout-button thm-btn thm-btn__2 no-icon br-0 alt wc-forward">
+                                    <a href="index.php?pg=bill"
+                                       class="checkout-button thm-btn thm-btn__2 no-icon br-0 alt wc-forward">
                                                 <span class="btn-wrap">
                                                     <span>Đặt Hàng</span>
                                                     <span>Đặt Hàng</span>
@@ -135,32 +142,33 @@
 
 
 <script>
-    function tang(x,i){
+    function tang(x, i) {
         // thay doi so luong truc tiep voi DOM HTML
         var cha = x.parentElement;
-        var soluongcu=cha.children[1];
-        var soluongmoi=parseInt(soluongcu.innerText)+1;
-        soluongcu.innerText=soluongmoi;
-        window.location.href = "index.php?pg=increase&idcart="+i;
+        var soluongcu = cha.children[1];
+        var soluongmoi = parseInt(soluongcu.innerText) + 1;
+        soluongcu.innerText = soluongmoi;
+        window.location.href = "index.php?pg=increase&idcart=" + i;
         // alert(soluongcu);
         //goi ham cap nhat session
-        
+
     }
-    function giam(x,i){
+
+    function giam(x, i) {
         // thay doi so luong truc tiep voi DOM HTML
         var cha = x.parentElement;
-        var soluongcu=cha.children[1];
-        if(parseInt(soluongcu.innerText)>1){
-            var soluongmoi=parseInt(soluongcu.innerText)-1;
-            soluongcu.innerText=soluongmoi;
-            window.location.href = "index.php?pg=decrease&idcart="+i;
-        }else{
+        var soluongcu = cha.children[1];
+        if (parseInt(soluongcu.innerText) > 1) {
+            var soluongmoi = parseInt(soluongcu.innerText) - 1;
+            soluongcu.innerText = soluongmoi;
+            window.location.href = "index.php?pg=decrease&idcart=" + i;
+        } else {
             alert("Số lượng tối thiểu là 1 ");
         }
-        
+
 
         // alert(soluongcu);
         //goi ham cap nhat session
-        
+
     }
 </script>

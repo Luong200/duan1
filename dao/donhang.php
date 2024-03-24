@@ -15,8 +15,7 @@ function loadall_cart_count($idbill){
 function loadall_bill()
 {
     $sql ="SELECT * FROM bill order by id desc";
-    $listbill=pdo_query($sql);
-    return $listbill;
+    return pdo_query($sql);
 }
 
 function detail_bill($id)

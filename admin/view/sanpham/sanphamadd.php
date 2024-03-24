@@ -27,6 +27,12 @@
                             <?=$html_danhmuclist;?>
                           </select>
                     </div>
+                    <div class="form-group">
+                        <label for="price">Số lượng:</label>
+                        <div class="input-group mb-3">
+                            <input type="text" name="soluong" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" placeholder="Nhập số lượng">
+                        </div>
+                    </div>
                     <div class="form-group id_price">
                         <label for="price">Giá gốc:</label>
                         <div class="input-group mb-3">

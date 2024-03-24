@@ -12,6 +12,7 @@
     include "dao/user.php";
     include "dao/danhmuc.php";
     include "dao/sanpham.php";
+    include "dao/product_variants.php";
     include "dao/giohang.php";
     include "dao/donhang.php";
 
@@ -33,7 +34,6 @@
 
                 $kyw="";
                 $titlepage="";
-
                 if(!isset($_GET['iddm'])){
                     $iddm=0;
                     
@@ -60,6 +60,14 @@
                     $iddm=get_iddm($id);
                     $dssp_lienquan=get_dssp_lienquan($iddm, $id);
                     $spchitiet=get_sanphamchitiet($id);
+                    $spchitiet=get_sanphamchitiet($id);
+                    $danhmuc = get_cate_view_one($iddm);
+                    $colorsData =  [];
+                    $sizesData =  [];
+                    $pricesData =  [];
+                    $varibleAll = loadAll_varible($id);
+
+
                     include "view/sanphamchitiet.php";
                 }else{
                     include "view/home.php";
@@ -73,6 +81,8 @@
                     $img=$_POST["img"];
                     $price=$_POST["price"];
                     $soluong=$_POST["soluong"];
+                    $idVarible=$_POST["varible"];
+                    $nameVarible=$_POST["nameVarible"];
                     $thanhtien=(int)$soluong * (int)$price;
                     $existingProductKey = -1;
                     foreach ($_SESSION["giohang"] as $key => $product) {
@@ -88,7 +98,7 @@
                         $_SESSION["giohang"][$existingProductKey]["thanhtien"] += $thanhtien;
                     } else {
                         // Nếu sản phẩm chưa tồn tại, thêm mới vào giỏ hàng
-                        $sp = array("idpro" => $idpro, "name" => $name, "img" => $img, "price" => $price, "soluong" => $soluong, "thanhtien" => $thanhtien);
+                        $sp = array("idpro" => $idpro, "name" => $name, "img" => $img, "price" => $price, "soluong" => $soluong, "thanhtien" => $thanhtien,"id_variants" => $idVarible,'name_varible' =>$nameVarible );
                         array_push($_SESSION["giohang"], $sp);
                     }
 
@@ -182,7 +192,7 @@
                         // insert gio hang từ session từ table cart
                         foreach ($_SESSION['giohang'] as $sp) {
                             extract($sp);
-                            cart_insert($idpro, $price, $name, $img,  $soluong, $thanhtien,$idbill);
+                            cart_insert($idpro, $price, $name, $img,  $soluong, $thanhtien,$idbill,$id_variants);
                         }
                         ///xóa sesion
                         $_SESSION['giohang']=[];
