@@ -1,6 +1,7 @@
 <?php
-    $html_danhmuclist=showdm_admin($danhmuclist,$iddm);
+    $html_danhmuclist=showdm_admin_no_select($danhmuclist);
 ?>
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 <div class="main-content">
 <div class="page-content dark:bg-zinc-700">
             <div class="container-fluid px-[0.625rem]">
@@ -22,17 +23,13 @@
                     <div class="form-group">
                         <label for="categories">Danh mục:</label>
                         <select class="dark:bg-zinc-800 dark:border-zinc-700 w-full rounded border-gray-100 py-2.5 text-sm text-gray-500 focus:border focus:border-violet-500 focus:ring-0 dark:bg-zinc-700/50 dark:text-zinc-100/60" name="iddm" aria-label="Default select example">
-                            <option selected>Chọn danh mục</option>
+                            <option value="0" selected>Chọn danh mục</option>
                             <?=$html_danhmuclist;?>
-                            
                           </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group id_price">
                         <label for="price">Giá gốc:</label>
                         <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text">$</span>
-                            </div>
                             <input type="text" name="price" id="price" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" placeholder="Nhập giá gốc">
                         </div>
                     </div>
@@ -47,16 +44,24 @@
                         </div>
                     </div> -->
                     <div class="form-group">
+                        <label>Màu sắc</label>
+                        <input name='color' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value='' autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Kích cỡ</label>
+                        <input name='size' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value='' autofocus>
+                    </div>
+
+                    <div class="form-group id_prices" hidden>
+                        <label>Giá tiền biến thể</label>
+                        <input name='prices' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value='' autofocus>
+                    </div>
+
+                    <div class="form-group">
                         <label>Mô tả ngắn</label>
-                        <textarea class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" name="mota" rows="3"
-                            placeholder="Nhập 1 đoạn mô tả ngắn về sản phẩm" style="height: 78px;">
+                        <textarea class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" name="mota" rows="3">
                         </textarea>
                     </div>
-                    <!-- <div class="form-group">
-                        <label>Mô tả chi tiết</label>
-                        <textarea class="form-control" name="detail" rows="3"
-                            placeholder="Nhập 1 đoạn mô tả ngắn về sản phẩm" style="height: 78px;"></textarea>
-                    </div> -->
                     <div class="form-group">
                         <button type="submit" name="addproduct" class="btn bg-violet-500 border-transparent text-white font-medium w-28 hover:bg-violet-700 focus:bg-violet-700 focus:ring focus:ring-violet-50">Thêm sản phẩm</button>
                     </div>
@@ -64,6 +69,30 @@
             </div>
 </div>
 </div>
-            <script>
-                new DataTable('#example');
-            </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<script>
+    var input = document.querySelector('input[name=color]');
+    var inputsize = document.querySelector('input[name=size]');
+    var inputprices= document.querySelector('input[name=prices]');
+    var inputid_prices= document.querySelector('.id_prices');
+    var inputid_price= document.querySelector('.id_price');
+    const hadleInput = new Tagify(input)
+    const hadlesize =  new Tagify(inputsize)
+    new Tagify(inputprices)
+    hadleInput.on('add', function(e){
+        inputid_prices.hidden=false;
+        inputid_price.hidden=true;
+    });
+    console.log(hadleInput);
+
+    hadleInput.on('remove', function(e){
+        if(e.detail.index === 0){
+            inputid_prices.hidden=true;
+            inputid_price.hidden=false;
+        }
+    });
+
+</script>
+

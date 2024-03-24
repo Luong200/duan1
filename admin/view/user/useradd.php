@@ -40,7 +40,7 @@
                                                 <div class="grid grid-cols-12 mb-4">
                                                     <label for="horizontal-email-input" class="col-span-12 lg:col-span-3 font-medium text-gray-700 dark:text-zinc-100">UserName</label>
                                                     <div class="col-span-12 lg:col-span-9">
-                                                        <input type="text" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" id="horizontal-email-input" placeholder="Enter your username">
+                                                        <input type="text" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" id="horizontal-email-input" name="username" placeholder="Enter your username">
                                                     </div>
                                                 </div>
                                                 <div class="grid grid-cols-12 mb-4">
@@ -64,6 +64,7 @@
                                                 <div class="grid grid-cols-12 mb-4">
                                                     <label for="horizontal-email-input" class="col-span-12 lg:col-span-3 font-medium text-gray-700 dark:text-zinc-100">Email</label>
                                                     <div class="col-span-12 lg:col-span-9">
+
                                                         <input type="email" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60"  name="email" id="email" >
                                                     </div>
                                                 </div>
@@ -76,7 +77,10 @@
                                                 <div class="grid grid-cols-12 mb-4">
                                                     <label for="horizontal-email-input" class="col-span-12 lg:col-span-3 font-medium text-gray-700 dark:text-zinc-100">Vai trò</label>
                                                     <div class="col-span-12 lg:col-span-9">
-                                                        <input type="text" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" id="role" name="role" >
+                                                        <select class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60"  name="role" aria-label="Default select example">
+                                                            <option value="0" selected>Người dùng</option>
+                                                            <option value="1">Admin</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="grid grid-cols-12 justify-content-end">
@@ -84,7 +88,7 @@
                                                         
     
                                                         <div class="mt-6">
-                                                            <button type="submit" class="btn bg-violet-500 border-transparent text-white font-medium w-28 hover:bg-violet-700 focus:bg-violet-700 focus:ring focus:ring-violet-50" name="themmoi" value="Thêm Mới Tài Khoản">Submit</button>
+                                                            <button type="submit" class="btn bg-violet-500 border-transparent text-white font-medium hover:bg-violet-700 focus:bg-violet-700 focus:ring focus:ring-violet-50" name="themmoi" value="Thêm Mới Tài Khoản">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>

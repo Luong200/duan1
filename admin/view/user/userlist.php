@@ -30,7 +30,7 @@
                            <a href="index.php?pg=adduser"><button type="button" class=" btn text-white bg-green-500 border-green-500 hover:bg-green-600 hover:border-green-600 focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-500/30 active:bg-green-600 active:border-green-600">Add</button></a> 
 
                             <div class="card-body relative overflow-x-auto">
-                                <table id="datatable-buttons" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
+                                <table id="example" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
                                     <thead>
                                         <tr>
                                             <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600">UserName</th>
@@ -55,7 +55,7 @@
                             <td class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $dienthoai?></td>
                             <td class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $role=="0" ? "Người dùng" :"ADMIN"?></td>
                             <td>
-                                <a href="index.php?pg=update_user&id=<?php echo $id?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
+                                <a href="index.php?pg=suatk&id=<?php echo $id?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
                                 <a href="index.php?pg=delete_user&id=<?php echo $id?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Xóa</a>
                             </td>
                         </tr>
@@ -73,6 +73,11 @@
             </div>
         </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
-        new DataTable('#example');
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
     </script>

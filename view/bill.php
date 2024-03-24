@@ -25,9 +25,9 @@ $html_cart='';
                 <tr>                   
                     <td><img src="'.IMG_PATH_USER.$img.'" alt="" style="width:100px; height:120px;" ></td>
                     <td>'.$name.'</td>
-                    <td>'.$price.'</td>
+                    <td>'.number_format($price).'</td>
                     <td>'.$soluong.'</td>
-                    <td>'.$tt.' (VNĐ)</td>
+                    <td>'.number_format($tt).' (VNĐ)</td>
                           
                 </tr>
                 
@@ -35,9 +35,8 @@ $html_cart='';
         ;
     }   
 ?>
-<div class="containerfull">
-        <div class="bgbanner">ĐƠN HÀNG</div>
-    </div>
+
+
 
     <section class="containerfull">
         <div class="container">
@@ -58,25 +57,11 @@ $html_cart='';
                         <label for="dienthoai"><b>Điện thoại</b></label>
                         <input type="text" placeholder="Nhập điện thoại" value="<?=$dienthoai?>"  name="dienthoai" id="dienthoai" >
                     </div>
-                    <div class="ttdathang">
-                        <a onclick="showttnhanhang()" style="cursor: pointer;">
-                        &rArr; Thay đổi thông tin nhận hàng
-                        </a>
-                    </div>
-                    <div class="ttdathang" id="ttnhanhang">
-                        <h2>Thông tin người nhận hàng</h2>
-                    
-                        <label for="hoten"><b>Họ và tên</b></label>
-                        <input type="text" placeholder="Nhập họ tên đầy đủ" name="hoten_nguoinhan" id="hoten_nguoinhan" >
-                    
-                        <label for="diachi"><b>Địa chỉ</b></label>
-                        <input type="text" placeholder="Nhập địa chỉ" name="diachi_nguoinhan" id="diachi_nguoinhan">
-                    
-                        <label for="dienthoai"><b>Điện thoại</b></label>
-                        <input type="text" placeholder="Nhập điện thoại" name="dienthoai_nguoinhan" id="dienthoai_nguoinhan">
-                    </div>
-                        
-                    
+                    <?php
+                    if(isset($_GET['error'])){
+                        echo "<div class='error alert-danger my-4'>Vui lòng nhập đầy đủ thông tin</div>";
+                    }
+                    ?>
                     
                 </div>
                 <?php 

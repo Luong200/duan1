@@ -121,7 +121,26 @@
                 break;
             case 'delcart':
                 if(isset($_GET['idcart'])){
-                    array_slice($_SESSION["giohang"],$_GET['idcart'],1);
+                    unset($_SESSION["giohang"][$_GET['idcart']]);
+                }else{
+                    $_SESSION["giohang"]=[];
+                }
+                header('Location: index.php?pg=viewcart');
+                break;
+
+            case 'increase' :
+                if(isset($_GET['idcart'])){
+                    $_SESSION["giohang"][$_GET['idcart']]["soluong"]++;
+                    $_SESSION["giohang"][$_GET['idcart']]["thanhtien"]=$_SESSION["giohang"][$_GET['idcart']]["soluong"]*$_SESSION["giohang"][$_GET['idcart']]["price"];
+                }else{
+                    $_SESSION["giohang"]=[];
+                }
+                header('Location: index.php?pg=viewcart');
+                break;
+            case 'decrease':
+                if(isset($_GET['idcart'])){
+                    $_SESSION["giohang"][$_GET['idcart']]["soluong"]--;
+                    $_SESSION["giohang"][$_GET['idcart']]["thanhtien"]=$_SESSION["giohang"][$_GET['idcart']]["soluong"]*$_SESSION["giohang"][$_GET['idcart']]["price"];
                 }else{
                     $_SESSION["giohang"]=[];
                 }
@@ -136,40 +155,47 @@
                     $diachi=$_POST["diachi"];
                     $email=$_POST["email"];
                     $dienthoai=$_POST["dienthoai"];
-                    $nguoinhan_ten=$_POST["hoten_nguoinhan"];
-                    $nguoinhan_diachi=$_POST["diachi_nguoinhan"];
-                    $nguoinhan_tel=$_POST["dienthoai_nguoinhan"];
+                    $nguoinhan_ten='';
+                    $nguoinhan_diachi='';
+                    $nguoinhan_tel='';
                     $pttt=$_POST["pttt"];
-                    $ngaydathang=date('h:i:sa d/m/Y');
-                    // inser user moi
-                    $username="guest".rand(1,999);
-                    $password="123456";
-                    $iduser=user_insert_id($username,$password,$hoten,$diachi, $email, $dienthoai);
-                    //Tao don hang
-                    $madh="Darcy".$iduser."-".date("His-dmY");
-                    $total=get_tongdonhang();
-                    $ship=0;
-                    
-                    if(isset($_SESSION['giatrivoucher'])){
-                        $voucher=$_SESSION["giatrivoucher"];
-                    }else{
-                        $voucher=0;
+                    if(!empty($hoten) && !empty($diachi) && !empty($email) && !empty($dienthoai) ){
+                        $ngaydathang=date('h:i:sa d/m/Y');
+                        // inser user moi
+                        $username="guest".rand(1,999);
+                        $password="123456";
+                        $iduser=user_insert_id($username,$password,$hoten,$diachi, $email, $dienthoai);
+                        //Tao don hang
+                        $madh="Darcy".$iduser."-".date("His-dmY");
+                        $total=get_tongdonhang();
+                        $ship=0;
+
+                        if(isset($_SESSION['giatrivoucher'])){
+                            $voucher=$_SESSION["giatrivoucher"];
+                        }else{
+                            $voucher=0;
+                        }
+
+                        $tongthanhtoan=($total - $voucher) + $ship;
+                        //tao bill
+                        $idbill=bill_insert_id($madh,$iduser,$hoten,$email,$dienthoai,$diachi,$ngaydathang, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
+                        // insert gio hang từ session từ table cart
+                        foreach ($_SESSION['giohang'] as $sp) {
+                            extract($sp);
+                            cart_insert($idpro, $price, $name, $img,  $soluong, $thanhtien,$idbill);
+                        }
+                        ///xóa sesion
+                        $_SESSION['giohang']=[];
+                        include "view/bill_configm.php";
+                    }else {
+                        $error="Vui lòng nhập đầy đủ thông tin!";
+                        header("location: index.php?pg=bill&error=$error");
                     }
 
-                    $tongthanhtoan=($total - $voucher) + $ship;
-                    //tao bill
-                    $idbill=bill_insert_id($madh,$iduser,$hoten,$email,$dienthoai,$diachi,$ngaydathang, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
-                    // insert gio hang từ session từ table cart
-                    foreach ($_SESSION['giohang'] as $sp) {
-                        extract($sp);
-                        cart_insert($idpro, $price, $name, $img,  $soluong, $thanhtien,$idbill);
-                    }
-                    ///xóa sesion 
-                        $_SESSION['giohang']=[];
                     
                     // include "view/donhang_configm.php";
                 }
-                include "view/bill_configm.php";
+
                 break;
 //////////////////////DANG KY, DANG NHAP/////////////////                
             case 'login':

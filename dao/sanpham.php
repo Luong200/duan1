@@ -4,13 +4,14 @@ require_once 'pdo.php';
 function sanpham_insert($name, $img, $price, $mota, $iddm)
 {
     $sql = "INSERT INTO sanpham(name, img, price,mota, iddm) VALUES (?,?,?,?,?)";
-    pdo_execute($sql, $name, $img, $price, $mota, $iddm);
+    return pdo_execute_id($sql, $name, $img, $price, $mota, $iddm);
 }
 
 function sanpham_update($name, $img, $price, $mota, $iddm, $id)
 {
     if ($img != "") {
         $sql = "UPDATE sanpham SET name=?,img=?, price=?,mota=?,iddm=? WHERE id=?";
+
         pdo_execute($sql, $name, $img, $price, $mota, $iddm, $id);
     } else {
         $sql = "UPDATE sanpham SET name=?, price=?,mota=?,iddm=? WHERE id=?";
@@ -116,7 +117,7 @@ function showsp($dssp)
                                             </ul>
                                             <span>(126) Review</span>
                                         </div>
-                                        <h2 class="product__title"><a href="shop-single.html">Ninja Compact Smoothie & Food Processing Blender</a></h2>
+                                        <h2 class="product__title"><a href="shop-single.html">'.$name.'</a></h2>
                                         <h4 class="product__price"><span class="new"> ' . number_format($price) . ' VND</span></h4>
                                     </div>
                                     <ul class="product__action">

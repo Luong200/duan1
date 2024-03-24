@@ -9,11 +9,19 @@ function getall_user()
 function delete_user($id){
     $sql="DELETE FROM user WHERE id=".$id;
     pdo_execute($sql);
+}
+
+function findBill($id){
+    $sqlBill="SELECT * FROM bill WHERE iduser =".$id;
+    return pdo_query($sqlBill);
+}
+
+
+
 function loadone_user($id) {
-    $sql="SELECT *FROM user WHERE id=".$id;
+    $sql="SELECT * FROM user WHERE id=".$id;
     $tk=pdo_query_one($sql);
     return $tk;
-}
 }
 /////////
 function user_insert($username, $password, $email){

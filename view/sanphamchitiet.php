@@ -56,21 +56,27 @@
                     </div>
 
                     <div class="product-option">
-                        <form class="form">
                             <div class="product-row">
                                 <div>
                                     <input class="product-count" type="text" value="1" name="product-count">
                                 </div>
                                 <div class="add-to-cart-btn">
-                                    <button class="thm-btn thm-btn__2 no-icon" type="submit">
+                                    <form action="index.php?pg=addcart" method="post">
+                                        <input type="hidden" name="idpro" value="<?php echo $spchitiet['id'] ?>">
+                                        <input type="hidden" name="name" value="<?php echo $spchitiet['name'] ?>">
+                                        <input type="hidden" name="img" value="<?php echo $spchitiet['img'] ?>">
+                                        <input type="hidden" name="price" value="<?php echo $spchitiet['price'] ?>">
+                                        <input type="hidden" name="mota" value="<?php echo $spchitiet['mota'] ?>">
+                                        <input type="hidden" name="soluong" value="1">
+                                        <div class="btn_dathang" >  <button class="thm-btn thm-btn__2 no-icon" name="addcart" type="submit">
                                         <span class="btn-wrap">
                                             <span>Shop Now</span>
                                             <span>Shop Now</span>
                                         </span>
-                                    </button>
+                                            </button></div>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
                     </div>
 
 

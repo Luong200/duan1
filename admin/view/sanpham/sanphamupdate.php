@@ -12,6 +12,7 @@
     }
     $html_danhmuclist=showdm_admin($danhmuclist,$iddm);
 ?>
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 <div class="main-content ">
 <div class="page-content dark:bg-zinc-700">
             <div class="container-fluid px-[0.625rem]">
@@ -39,29 +40,37 @@
                             
                           </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" <?php  echo count($colorsData) > 0 ?  'hidden' : ''; ?>>
                         <label for="price">Giá gốc:</label>
                         <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text">$</span>
-                            </div>
                             <input type="text" name="price" value="<?=($price>0)? $price : '';?>" id="price" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" placeholder="Nhập giá gốc">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"  <?php  echo count($colorsData) > 0 ?  'hidden' : ''; ?>>
                         <label for="price_sale">Giá khuyến mãi:</label>
                         <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text">$</span>
-                            </div>
                             <input type="text" name="price_sale" id="price_sale" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60"
                                 placeholder="Giá khuyến mãi">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Màu sắc</label>
+                        <input name='color' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value='<?php foreach ($colorsData as $value){ echo $value . ",";  }?>' autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Kích cỡ</label>
+                        <input name='size' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value='<?php foreach ($sizesData as $value){ echo $value . ",";  }?>' autofocus>
+                    </div>
+
+                    <div class="form-group id_prices"  <?php  echo count($colorsData) > 0 ? '' : 'hidden'; ?>>
+                        <label>Giá tiền biến thể</label>
+                        <input name='prices' class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value=' <?php foreach ($pricesData as $value){ echo $value . ",";  }?>' autofocus>
+                    </div>
                     <div class="form-group">
                         <label>Mô tả ngắn</label>
                         <textarea class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" name="mota" rows="3"
-                            placeholder="Nhập 1 đoạn mô tả ngắn về sản phẩm" style="height: 78px;"></textarea>
+                            placeholder="Nhập 1 đoạn mô tả ngắn về sản phẩm" style="height: 78px;"><?=$mota?></textarea>
                     </div>
                     <!-- <div class="form-group">
                         <label>Mô tả chi tiết</label>
@@ -76,6 +85,28 @@
             </div>
 </div>
 </div>
-            <script>
-                new DataTable('#example');
-            </script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<script>
+    var input = document.querySelector('input[name=color]');
+    var inputsize = document.querySelector('input[name=size]');
+    var inputprices= document.querySelector('input[name=prices]');
+    var inputid_prices= document.querySelector('.id_prices');
+    var inputid_price= document.querySelector('.id_price');
+    const hadleInput = new Tagify(input)
+    const hadlesize =  new Tagify(inputsize)
+    new Tagify(inputprices)
+    hadleInput.on('add', function(e){
+        inputid_prices.hidden=false;
+        inputid_price.hidden=true;
+    });
+    console.log(hadleInput);
+
+    hadleInput.on('remove', function(e){
+        if(e.detail.index === 0){
+            inputid_prices.hidden=true;
+            inputid_price.hidden=false;
+        }
+    });
+
+</script>

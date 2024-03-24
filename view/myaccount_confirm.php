@@ -6,64 +6,32 @@
       extract($userinfo);
     }
 ?>
-<div class="containerfull">
-        <div class="bgbanner">THÔNG TIN</div>
-    </div>
-
-    <section class="containerfull">
-        <div class="container">
-            <div class="boxleft mr2pt menutrai">
-                <h1>DÀNH CHO BẠN</h1><br><br>
-                <a href="#">Cập nhật thông tin</a>
-                <a href="#">Lịch sử mua hàng</a>
-                <a href="#">Thoát hệ thống</a>
-            </div>
-            <div class="boxright">
-                <h1>THÔNG TIN ĐĂNG KÝ ĐÃ ĐƯỢC CẬP NHẬT</h1><br>
-                <div class="containerfull mr30">
-                     <div class="row">
-                        <div class="col-25">
-                           <label for="username">Tên đăng nhập</label>
-                        </div>
-                        <div class="col-75">
-                           <?=$username?>
-                        </div>
-                     </div>
-                     
-                     
-                     
-                     <div class="row">
-                        <div class="col-25">
-                           <label for="email">Email</label>
-                        </div>
-                        <div class="col-75">
-                           <?=$email?>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-25">
-                           <label for="email">Địa chỉ</label>
-                        </div>
-                        <div class="col-75">
-                           <?=$diachi?>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-25">
-                           <label for="email">Điện thoại</label>
-                        </div>
-                        <div class="col-75">
-                           <?=$dienthoai?>
-                        </div>
-                     </div>
-                     
-                     
-                     <br>
-                     
-                    
-                </div>
-            </div>
+<h1 class="my-2">THÔNG TIN ĐĂNG KÝ ĐÃ ĐƯỢC CẬP NHẬT</h1><br>
+<div class="container px-5 pb-5">
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Tên đăng nhập</td>
+            <td>      <?=$username?></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Email</td>
+            <td> <?=$email?></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td >Địa chỉ</td>
+            <td><?=$diachi?></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td >Điện thoại</td>
+            <td><?=$dienthoai?></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
-        </div>
-    </section>

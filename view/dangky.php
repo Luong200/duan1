@@ -1,18 +1,10 @@
 <?php
     
 ?>
-<div class="containerfull">
-        <div class="bgbanner">ĐĂNG KÝ THÀNH VIÊN</div>
-    </div>
+
 
     <section class="containerfull">
         <div class="container">
-            <div class="boxleft mr2pt menutrai">
-                <h1>DÀNH CHO BẠN</h1><br><br>
-                <a href="#">Cập nhật thông tin</a>
-                <a href="#">Lịch sử mua hàng</a>
-                <a href="#">Thoát hệ thống</a>
-            </div>
             <div class="boxright">
                 <!-- <h1>ĐĂNG KÝ</h1><br> -->
                 <div class="containerfull mr30">
@@ -59,10 +51,8 @@
                      
                      <br>
                      <div class="row">
-                        <div class="btn_dangky">
-                           <input type="submit" name="dangky" value="Đăng ký">
-                        </div>
-                        
+                           <input type="submit" name="dangky" class="thm-btn thm-btn__2 border-0" value="Đăng ký">
+
                      </div>
                      </form>
                      <p class="text-sm text-center">

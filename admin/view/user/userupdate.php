@@ -41,13 +41,16 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Role</label>
-                        <input type="number" class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60" value="<?=$role?>" name="role" id="role" >
+                        <select class="w-full py-1.5 placeholder:text-sm border-gray-100 rounded dark:bg-zinc-700/50 dark:border-zinc-600 dark:placeholder:text-zinc-100/60"  name="role" aria-label="Default select example">
+                            <option value="0" <?=$role == 0 ? 'selected' : ''?>>Người dùng</option>
+                            <option value="1" <?=$role == 1 ? 'selected' : ''?>>Admin</option>
+                        </select>
                     </div>
                     
                     <input type="hidden" name="id" value="<?php if(isset($id)&&($id>0)) echo $id; ?>" >
                     <div class="form-group">
-                        <input type="submit" name="capnhat" value="Cập nhật tài khoản">
-                        <!-- <button type="submit" name="capnhat" class="btn btn-primary">Cập nhật tài khoản</button> -->
+<!--                        <input type="submit" name="capnhat" value="Cập nhật tài khoản">-->
+                        <button type="submit" class="btn bg-violet-500 border-transparent text-white font-medium hover:bg-violet-700 focus:bg-violet-700 focus:ring focus:ring-violet-50 mt-2" name="capnhat" >Cập nhật tài khoản</button>
                     </div>
                 </form>
             </div>

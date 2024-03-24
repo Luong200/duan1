@@ -24,8 +24,12 @@
 
         <link rel="stylesheet" href="../layout/assets/css/icons.css" />
         <link rel="stylesheet" href="../layout/assets/css/tailwind.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <!-- color picker css -->
 
 
+    <!-- datepicker css -->
+    <link rel="stylesheet" href="../layout/assets/libs/flatpickr/flatpickr.min.css">
 
 
     </head>
@@ -87,13 +91,13 @@
                             <div class="border border-gray-50 dark:border-zinc-600" aria-labelledby="navNotifications">
                                 
                                 <div class="dropdown-item dark:text-gray-100">
-                                    <a class="px-3 py-2 hover:bg-gray-50/50/30 block dark:hover:bg-zinc-700/50" href="index.php">
+                                    <a class="px-3 py-2 hover:bg-gray-50/50/30 block dark:hover:bg-zinc-700/50" href="../index.php">
                                         <i class="mdi mdi-lock text-16 align-middle mr-1"></i> Home Client
                                     </a>
                                 </div>
                                 <hr class="border-gray-100 dark:border-gray-700">
                                 <div class="dropdown-item dark:text-gray-100">
-                                    <a class="p-3 hover:bg-gray-50/50/30 block dark:hover:bg-zinc-700/50" href="logout.html">
+                                    <a class="p-3 hover:bg-gray-50/50/30 block dark:hover:bg-zinc-700/50" href="index.php?pg=logout">
                                         <i class="mdi mdi-logout text-16 align-middle mr-1"></i> Logout
                                     </a>
                                 </div>

@@ -5,7 +5,7 @@ if (isset($_SESSION['s_user']) && (count($_SESSION['s_user']) > 0)) {
     //        <a href="index.php?pg=logout">Thoát</a>'
     $html_account =  '<a  href="index.php?pg=myaccount" class="text-white">' . $username . '</a>/<a class="text-white" href="index.php?pg=logout">Thoát</a>';
 } else {
-    $html_account = '<a  href="index.php?pg=dangky" class="text-white">Login</a>/<a class="text-white" href="index.php?pg=dangnhap">Sign Up</a>';
+    $html_account = '<a  href="index.php?pg=dangnhap" class="text-white">Login</a>/<a class="text-white" href="index.php?pg=dangky">Sign Up</a>';
 }
 // $html_dssp_new=showspCategories($dssp_new);
 $html_dscate_view=showcategoryHeader($dscategory_view);
@@ -26,7 +26,7 @@ $html_dscate_view=showcategoryHeader($dscategory_view);
     <link rel="shortcut icon" href="assets/img/favicon.png" type="images/x-icon" />
 
     <!-- css include -->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="layout/assets/css/fontawesome.css">
     <link rel="stylesheet" href="layout/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="layout/assets/css/fontawesome.css">
     <link rel="stylesheet" href="layout/assets/css/animate.css">
@@ -87,7 +87,7 @@ $html_dscate_view=showcategoryHeader($dscategory_view);
             <div class="container">
                 <div class="header__middle ul_li_between justify-content-xs-center">
                     <div class="header__logo">
-                        <a href="index.html">
+                        <a href="index.php">
                             <img src="layout/assets/img/logo/logo.svg" alt="">
                         </a>
                     </div>
@@ -118,18 +118,8 @@ $html_dscate_view=showcategoryHeader($dscategory_view);
                         </div>
                     </div>
                     <div class="header__icons ul_li">
-                        <div class="icon">
-                            <a href="#!"><img src="layout/assets/img/icon/user.svg" alt=""></a>
-                        </div>
-                        <div class="icon wishlist-icon">
-                            <a href="#!">
-                                <img src="layout/assets/img/icon/heart.svg" alt="">
-                                <span class="count">0</span>
-                            </a>
-                        </div>
                         <div class="cart_btn icon">
-                            <img src="layout/assets/img/icon/shopping_bag.svg" alt="">
-                            <span class="count">0</span>
+                            <a href="index.php?pg=viewcart"><img src="layout/assets/img/icon/shopping_bag.svg" alt=""></a>
                         </div>
                     </div>
                 </div>

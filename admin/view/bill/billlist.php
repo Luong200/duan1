@@ -29,7 +29,7 @@
                             
 
                             <div class="card-body relative overflow-x-auto">
-                                <table id="datatable-buttons" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
+                                <table id="example" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
                                     <thead>
                                         <tr>
                                         
@@ -79,8 +79,13 @@
             </div>
         </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
-        new DataTable('#example');
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
     </script>
 
 <?php

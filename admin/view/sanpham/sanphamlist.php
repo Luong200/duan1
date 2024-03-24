@@ -34,7 +34,7 @@
                            <a href="index.php?pg=addproduct"><button type="button" class=" btn text-white bg-green-500 border-green-500 hover:bg-green-600 hover:border-green-600 focus:bg-green-600 focus:border-green-600 focus:ring focus:ring-green-500/30 active:bg-green-600 active:border-green-600">Add sản phẩm</button></a> 
 
                             <div class="card-body relative overflow-x-auto">
-                                <table id="datatable-buttons" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
+                                <table id="example" class="table w-full pt-4 text-gray-700 dark:text-zinc-100">
                                     <thead>
                                         <tr>
                                             <th class="p-4 pr-8 border border-y-2 border-gray-50 dark:border-zinc-600">STT</th>
@@ -63,6 +63,11 @@
       </div>
     </div>
     <script src="assets/js/main.js"></script>
-    <script>
-      new DataTable("#example");
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>

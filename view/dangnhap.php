@@ -1,63 +1,64 @@
 <?php
     
 ?>
-<div class="containerfull">
-        <div class="bgbanner">ĐĂNG NHẬP</div>
-    </div>
 
-    <section class="containerfull">
+<main>
+
+    <!-- breadcrumb start -->
+    <section class="breadcrumb-area">
         <div class="container">
-            <div class="boxleft mr2pt menutrai">
-                <h1>DANH CHO BẠN</h1><br><br>
-                <a href="">Cập nhật thông tin</a>
-                <a href="">Lịch sử mua hàng</a>
-                <a href="">Thoát</a>
+            <div class="radios-breadcrumb breadcrumbs">
+                <ul class="list-unstyled d-flex align-items-center">
+                    <li class="radiosbcrumb-item radiosbcrumb-begin">
+                        <a href="index.html"><span>Home</span></a>
+                    </li>
+                    <li class="radiosbcrumb-item radiosbcrumb-end">
+                        <span>Account</span>
+                    </li>
+                </ul>
             </div>
-            <div class="boxright">
-                <h1>ĐĂNG NHẬP</h1><br>
-                <div class="containerfull mr30">
-                <h2 style="color:red">
-                  <?php
-                           if(isset($_SESSION['tb_dangnhap'])&&($_SESSION['tb_dangnhap']!="")){
-                              echo $_SESSION['tb_dangnhap'];
-                              unset($_SESSION['tb_dangnhap']);
-                           } 
-                           
-                  ?>
-                  </h2>
-                    <form action="index.php?pg=login" method="post">
-                            <div class="row">
-                                <div class="col-25">
-                                    <label for="username">Tên đăng nhập</label>
-                                </div>
-                                <div class="col-75">
-                                    <input type="text" id="username" name="username" placeholder="Username...">
-                                    <?php echo !empty($error['username']) ? '<span  style="color:red"> ' . $error['username'] . '</span>' : ""  ?>
-                                </div>
+        </div>
+    </section>
+    <!-- breadcrumb end -->
+
+    <!-- account start -->
+    <section class="account pb-90">
+        <div class="container">
+            <div class="row mt-none-30">
+                <div class="col-lg-12 mt-30">
+                    <div class="account__wrap pl-60">
+                        <h2 class="account__title">ĐĂNG NHẬP</h2>
+                        <?php
+                        if(isset($_SESSION['tb_dangnhap'])&&($_SESSION['tb_dangnhap']!="")){
+                            echo $_SESSION['tb_dangnhap'];
+                            unset($_SESSION['tb_dangnhap']);
+                        }
+                        ?>
+                        <form action="index.php?pg=login" method="post">
+                            <div class="account__input-field">
+                                <input type="text" id="username" name="username" placeholder="Username...">
+                                <?php echo !empty($error['username']) ? '<span  style="color:red"> ' . $error['username'] . '</span>' : ""  ?>
                             </div>
-                            <div class="row">
-                                <div class="col-25">
-                                    <label for="lname">Mật khẩu</label>
-                                </div>
-                                <div class="col-75">
-                                    <input type="password" id="password" name="password" placeholder="Password...">
-                                    <?php echo !empty($error['password']) ? '<span style="color:red">' . $error['password'] . '</span>' : ""  ?>
-                                </div>
+                            <div class="account__input-field">
+                                <input type="password" id="password" name="password" placeholder="Password...">
+                                <?php echo !empty($error['password']) ? '<span style="color:red">' . $error['password'] . '</span>' : ""  ?>
                             </div>
-                            
-                            
-                            <br>
-                            <div class="row">
-                                <input type="submit" name="dangnhap" value="Đăng nhập">
+                            <div class="account__btn">
+                                <input type="submit" class="thm-btn thm-btn__2 border-0" name="dangnhap" value="Đăng nhập">
                                 <?php echo !empty($loginError) ? '<span style="color:red">' . $loginError . '</span>' : ""  ?>
+
                             </div>
                         </form>
+
                         <p class="text-sm text-center">
                             Bạn chưa có tài khoản? <a class="hover:underline" href="index.php?act=dangky">Hãy tạo ngay!</a>
                         </p>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </section>
+    <!-- account end -->
+
+</main>
+

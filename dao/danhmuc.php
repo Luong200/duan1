@@ -100,6 +100,14 @@ function showdm_admin($dsdm,$iddm){
     return $html_dm;
 }
 
+function showdm_admin_no_select($dsdm){
+    $html_dm='';
+    foreach ($dsdm as $dm) {
+        extract($dm);
+        $html_dm.='<option value="'.$id.'">'.$name.'</option> ';
+    }
+    return $html_dm;
+}
 
 
 // /**
