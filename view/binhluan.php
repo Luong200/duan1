@@ -100,11 +100,10 @@ $dsbl = loadall_binhluan($idpro);
                     <div>
                         <textarea class="form-control" placeholder="Review *" name="noidung"></textarea>
                     </div>
-                    <div class="rating-wrapper">
+                    <div class="rating-wrapper mt-2">
 
                         <div class="submit">
                             <input name="guibinhluan" class="thm-btn thm-btn__2 no-icon" type="submit" value="Gửi bình luận">
-                                
                         </div>
                     </div>
                 </form>

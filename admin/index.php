@@ -91,13 +91,13 @@ if (isset($_GET["pg"])) {
                 $prices = $_POST['prices'];
                 $soluong = $_POST['soluong'];
 
-                $img = time() . '_' . basename($_FILES["img"]["name"]);
+                $img = $_FILES["img"]['name'] == "" ? "" : time() . '_' . basename($_FILES["img"]["name"]);
 
                            if(!empty($name) && !empty($mota) && !empty($iddm)  ) {
 
                                if ($img != "") {
                                    //upload anh
-                                   $target_file = IMG_PATH_ADMIN . $img;
+                                   $target_file = IMG_PATH_ADMIN .   time() . '_' . basename($_FILES["img"]["name"]);;
                                    move_uploaded_file($_FILES["img"]["tmp_name"], $target_file);
                                } else {
                                    $img = "";

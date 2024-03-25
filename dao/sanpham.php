@@ -14,8 +14,6 @@ function sanpham_update($name, $img, $price, $mota, $iddm, $id,$soluong)
         pdo_execute($sql, $name, $img, $price, $mota, $iddm,$soluong, $id);
     } else {
         $sql = "UPDATE sanpham SET name=?, price=?,mota=?,iddm=?,soluong=?  WHERE id=?";
-        echo $sql;
-        die();
         pdo_execute($sql, $name, $price, $mota, $iddm,$soluong, $id);
     }
 }
@@ -66,14 +64,39 @@ function get_cate_view()
 
 function get_dssp($kyw, $iddm, $limi)
 {
-    $sql = "SELECT * FROM sanpham WHERE 1";
+    $sql = "SELECT s.id, s.name, s.img, s.price, s.view, s.mota, s.bestseller, s.iddm, s.soluong, 
+        MIN(v.price) AS gia_thap_nhat, MAX(v.price) AS gia_cao_nhat
+        FROM sanpham s
+        LEFT JOIN product_variants v ON s.id = v.product_id";
+
+// Thêm điều kiện WHERE vào truy vấn
+    $whereClause = " WHERE 1=1"; // Một điều kiện luôn đúng để bắt đầu AND
+
+// Thêm điều kiện iddm nếu $iddm > 0
     if ($iddm > 0) {
-        $sql .= " AND iddm=" . $iddm;
+        $whereClause .= " AND s.iddm=" . $iddm;
     }
+
+// Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
     if ($kyw != "") {
-        $sql .= " AND name like '%" . $kyw . "%'";
+        $whereClause .= " AND s.name LIKE '%" . $kyw . "%'";
     }
-    $sql .= " ORDER BY id DESC limit " . $limi;
+
+// Nối điều kiện vào câu truy vấn
+    $sql .= $whereClause;
+
+// Sắp xếp theo id
+    $sql .= " GROUP BY s.id, s.name ORDER BY s.id DESC";
+
+// Thêm giới hạn số lượng sản phẩm nếu được chỉ định
+    if (!empty($limi) && is_numeric($limi)) {
+        $sql .= " LIMIT " . $limi;
+    } else {
+        // Nếu không có giới hạn được chỉ định, sử dụng mặc định hoặc không giới hạn
+        $sql .= " LIMIT 10"; // Ví dụ: giới hạn 10 sản phẩm
+    }
+
+// Sử dụng pdo_query để thực thi câu truy vấn
     return pdo_query($sql);
 }
 
@@ -234,7 +257,7 @@ function showcategory($dscate)
     $html_dssp = '';
     foreach ($dscate as $sp) {
         extract($sp);
-        $html_dssp .= ' <li><a href="#!"><img src="layout/assets/img/icon/cat_04.svg" alt="">' . $name . '</a></li>';
+        $html_dssp .= ' <li><a href="index.php?pg=sanpham&iddm='. $id .'"><img src="layout/assets/img/icon/cat_04.svg" alt="">' . $name . '</a></li>';
     }
     return $html_dssp;
 }

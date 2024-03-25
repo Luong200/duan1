@@ -49,12 +49,10 @@
                 }
 
                 $dssp=get_dssp($kyw,$iddm,12);
-
                 include "view/sanpham.php";
                 break;
             case 'sanphamchitiet':
                 $dsdm=danhmuc_all();
-                
                 if(isset($_GET["id"])&&($_GET["id"])>0){
                     $id=$_GET["id"];
                     $iddm=get_iddm($id);

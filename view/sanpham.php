@@ -108,7 +108,7 @@
                                             <div class="product__progress progress color-primary">
                                                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <h4 class="product__price"><span class="new"><?php echo $item['price'] ?></span></h4>
+                                            <h4 class="product__price"><span class="new"><?php echo $item['price'] == 0 ? number_format($item['gia_thap_nhat'])  . ' VND' . "-" . number_format($item['gia_cao_nhat']) . ' VND' : number_format($item['price'] ) . ' VND'  ?></span></h4>
                                             <p class="product-description"><?php echo $item['mota'] ?> </p>
                                         </div>
                                     </li>
@@ -159,8 +159,7 @@
                             <ul class="widget__category">
                             <?php foreach($dsdm as $item){
                             ?>
-                                <li><a href="#!"><?php echo $item['name'] ?><i class="far fa-chevron-right"></i></a></li>
-
+                                <li><a href="index.php?pg=sanpham&iddm=<?php echo $item['id'] ?>"><?php echo $item['name'] ?><i class="far fa-chevron-right"></i></a></li>
                             <?php
                             } ?>
                                 
