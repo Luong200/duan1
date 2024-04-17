@@ -10,10 +10,11 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Trạng thái đơn hàng</label>
         <select class="form-select" aria-label="Default select example" name="bill_status">
-            <option value="0" <?php echo $billDetail['bill_status'] == 0 ? 'selected' : '' ;?>>Đơn hàng mới</option>
-            <option value="1"  <?php echo $billDetail['bill_status'] == 1 ? 'selected' : '' ;?>>Đang xử lí</option>
+            <option value="0" <?php echo $billDetail['bill_status'] == 0 ? 'selected' : '' ;?>>Chờ kiểm duyệt</option>
+            <option value="1"  <?php echo $billDetail['bill_status'] == 1 ? 'selected' : '' ;?>>Đã Kiểm duyệt</option>
             <option value="2"  <?php echo $billDetail['bill_status'] == 2 ? 'selected' : '' ;?>>Đang Giao Hàng</option>
-            <option value="3"  <?php echo $billDetail['bill_status'] == 3 ? 'selected' : '' ;?>>Hoàn Tất</option>
+            <option value="3"  <?php echo $billDetail['bill_status'] == 3 ? 'selected' : '' ;?>>Đã Giao Hàng</option>
+            <option value="4"  <?php echo $billDetail['bill_status'] == 4 ? 'selected' : '' ;?>>Đã Đánh giá</option>
         </select>
         </div>
         <div class="mb-3">

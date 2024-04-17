@@ -34,7 +34,6 @@ function insert_themtaikhoan($username,$password,$hoten,$diachi,$email,$dienthoa
 }
 function user_insert_id($username,$password,$hoten,$diachi, $email, $dienthoai){
     $sql = "INSERT INTO user(username,password,hoten,diachi, email, dienthoai) VALUES (?,?,?,?,?,?)";
-    
     return pdo_execute_id($sql,$username,$password,$hoten,$diachi, $email, $dienthoai);
 }
 function user_update($username,$password,$email,$diachi,$dienthoai,$role,$id){

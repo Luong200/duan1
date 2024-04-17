@@ -62,41 +62,128 @@ function get_cate_view()
     return pdo_query($sql);
 }
 
-function get_dssp($kyw, $iddm, $limi)
+function get_dssp($kyw, $iddm, $start, $perPage)
 {
     $sql = "SELECT s.id, s.name, s.img, s.price, s.view, s.mota, s.bestseller, s.iddm, s.soluong, 
-        MIN(v.price) AS gia_thap_nhat, MAX(v.price) AS gia_cao_nhat
-        FROM sanpham s
-        LEFT JOIN product_variants v ON s.id = v.product_id";
+            MIN(v.price) AS gia_thap_nhat, MAX(v.price) AS gia_cao_nhat
+            FROM sanpham s
+            LEFT JOIN product_variants v ON s.id = v.product_id";
 
-// Thêm điều kiện WHERE vào truy vấn
+    // Thêm điều kiện WHERE vào truy vấn
     $whereClause = " WHERE 1=1"; // Một điều kiện luôn đúng để bắt đầu AND
 
-// Thêm điều kiện iddm nếu $iddm > 0
+    // Thêm điều kiện iddm nếu $iddm > 0
     if ($iddm > 0) {
         $whereClause .= " AND s.iddm=" . $iddm;
     }
 
-// Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
+    // Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
     if ($kyw != "") {
         $whereClause .= " AND s.name LIKE '%" . $kyw . "%'";
     }
 
-// Nối điều kiện vào câu truy vấn
+    // Nối điều kiện vào câu truy vấn
     $sql .= $whereClause;
 
-// Sắp xếp theo id
+    // Sắp xếp theo id
     $sql .= " GROUP BY s.id, s.name ORDER BY s.id DESC";
 
-// Thêm giới hạn số lượng sản phẩm nếu được chỉ định
-    if (!empty($limi) && is_numeric($limi)) {
-        $sql .= " LIMIT " . $limi;
-    } else {
-        // Nếu không có giới hạn được chỉ định, sử dụng mặc định hoặc không giới hạn
-        $sql .= " LIMIT 10"; // Ví dụ: giới hạn 10 sản phẩm
+    // Thêm phần LIMIT để chỉ lấy một phần của dữ liệu dựa trên vị trí bắt đầu và số lượng bản ghi trên mỗi trang
+    $sql .= " LIMIT $start, $perPage";
+
+    // Sử dụng pdo_query để thực thi câu truy vấn
+    return pdo_query($sql);
+}
+
+
+function count_records($kyw, $iddm)
+{
+    $sql = "SELECT COUNT(*) AS total_records
+            FROM sanpham s
+            LEFT JOIN product_variants v ON s.id = v.product_id
+            WHERE 1=1"; // Điều kiện luôn đúng để bắt đầu AND
+
+    // Thêm điều kiện iddm nếu $iddm > 0
+    if ($iddm > 0) {
+        $sql .= " AND s.iddm=" . $iddm;
     }
 
-// Sử dụng pdo_query để thực thi câu truy vấn
+    // Thêm điều kiện tìm kiếm theo tên sản phẩm nếu có
+    if ($kyw != "") {
+        $sql .= " AND s.name LIKE '%" . $kyw . "%'";
+    }
+
+    // Thực thi câu truy vấn
+    $result = pdo_query($sql);
+
+    // Lấy kết quả đếm số lượng bản ghi
+
+    return $result; // Trả về tổng số lượng bản ghi
+}
+
+
+
+function get_thongke_doanhthu_admin($start_date = null, $end_date = null)
+{
+    $sql = "SELECT DATE_FORMAT(ngaydathang, '%m-%Y') AS thang,
+               SUM(tongthanhtoan) AS doanh_thu
+            FROM bill
+            WHERE 1";
+
+    if ($start_date != null) {
+        $sql .= " AND ngaydathang >= '" . date("Y-m-d H:i:s", strtotime($start_date)) . "'";
+    }
+
+    if ($end_date != null) {
+        $sql .= " AND ngaydathang <= '" . date("Y-m-d H:i:s", strtotime($end_date)) . "'";
+    }
+
+    $sql .= " GROUP BY thang
+              ORDER BY thang DESC;";
+
+    return pdo_query($sql);
+}
+
+function get_thongke_donhang_admin($start_date = null, $end_date = null)
+{
+    $sql = "SELECT DATE_FORMAT(ngaydathang, '%m-%Y') AS thang,
+       COUNT(*) AS so_don_hang
+FROM bill
+WHERE 1";
+
+    if ($start_date != null) {
+        $sql .= " AND ngaydathang >= '" . date("Y-m-d H:i:s", strtotime($start_date)) . "'";
+    }
+
+    if ($end_date != null) {
+        $sql .= " AND ngaydathang <= '" . date("Y-m-d H:i:s", strtotime($end_date)) . "'";
+    }
+    $sql .= " GROUP BY thang
+              ORDER BY thang DESC;";
+    return pdo_query($sql);
+}
+
+
+function get_thongke_sanphambanchay_admin($start_date = null, $end_date = null)
+{
+    $sql = "SELECT p.id, p.name, SUM(c.soluong) AS so_luong_ban
+        FROM sanpham p
+        JOIN cart c ON p.id = c.idpro
+        JOIN bill b ON c.idbill = b.id
+        WHERE 1";
+
+    if ($start_date != null) {
+        $sql .= " AND b.ngaydathang >= '" . date("Y-m-d H:i:s", strtotime($start_date)) . "'";
+    }
+
+    if ($end_date != null) {
+        $sql .= " AND b.ngaydathang <= '" . date("Y-m-d H:i:s", strtotime($end_date)) . "'";
+    }
+
+    $sql .= " GROUP BY p.id, p.name
+          ORDER BY so_luong_ban DESC
+          LIMIT 10;";// Kết thúc câu truy vấn LIMIT 10
+    echo $sql;
     return pdo_query($sql);
 }
 

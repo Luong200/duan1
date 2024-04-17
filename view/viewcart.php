@@ -64,7 +64,6 @@ foreach ($_SESSION['giohang'] as $key => $sp) {
             <div class="row">
                 <div class="col col-xs-12">
                     <div class="woocommerce">
-                        <form action="/" method="post">
                             <table class="shop_table shop_table_responsive cart">
                                 <thead>
                                 <tr>
@@ -88,7 +87,7 @@ foreach ($_SESSION['giohang'] as $key => $sp) {
                                             <form action="index.php?pg=viewcart&voucher=1" method="post">
                                                 <input type="hidden" name="tongdonhang" value="<?= $tongdonhang ?>">
                                                 <input type="text" name="mavoucher" class="input-text" id="coupon_code"
-                                                       value="" placeholder="Nhập voucher"/>
+                                                       value="<?=  $maVoucher ?>" placeholder="Nhập voucher"/>
                                                 <button class="thm-btn thm-btn__2 br-0 no-icon" type="submit">
                                                             <span class="btn-wrap">
                                                                 <span>Apply Coupon</span>
@@ -105,7 +104,6 @@ foreach ($_SESSION['giohang'] as $key => $sp) {
                                 </tr>
                                 </tbody>
                             </table>
-                        </form>
 
                         <div class="cart-collaterals">
                             <div class="cart_totals calculated_shipping">

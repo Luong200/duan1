@@ -13,6 +13,7 @@
         $diachi="";
         $email="";
         $dienthoai="";
+        $id="";
     }
 //////////////////
 $html_cart='';
@@ -21,6 +22,7 @@ $html_cart='';
         extract($sp);
         $tt=(Int)$price*(Int)$soluong;
         $tong+=$tt;
+        $tong = $tong -$_SESSION['sale_off_order'];
         $html_cart.='
                 <tr>                   
                     <td><img src="'.IMG_PATH_USER.$img.'" alt="" style="width:100px; height:120px;" ></td>
@@ -44,7 +46,7 @@ $html_cart='';
                 <div class="col9 viewcart">
                     <div class="ttdathang">
                         <h2>Thông tin người đặt hàng</h2>
-                    
+                        <input type="hidden" name="id_user" value="<?=$id  ?>">
                         <label for="hoten"><b>Họ và tên</b></label>
                         <input type="text" placeholder="Nhập họ tên đầy đủ" value="<?=$hoten?>"  name="hoten" id="hoten" >
                     

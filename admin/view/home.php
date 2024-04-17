@@ -1,196 +1,5 @@
-<!-- <div class="main-content">
-                <h3 class="title-page">
-                    Dashboards
-                </h3>
-                <section class="statistics row">
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <a href="products.html">
-                            <div class="card mb-3 widget-chart">
-                                <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
-                                    <h5>
-                                        Tổng sản phẩm
-                                    </h5>
-                                </div>
-                                <span class="widget-numbers">3M</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <a href="user.html">
-                            <div class="card mb-3 widget-chart">
 
-                                <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
-                                    <h5>
-                                        Tổng thành viên
-                                    </h5>
-                                </div>
-                                <span class="widget-numbers">3M</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <a href="caterogies.html">
-                            <div class="card mb-3 widget-chart">
-                                <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
-                                    <h5>
-                                        Tổng doanh mục
-                                    </h5>
-                                </div>
-                                <span class="widget-numbers">3M</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <a href="#">
-                            <div class="card mb-3 widget-chart">
-                                <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
-                                    <h5>
-                                        Tổng doanh mục
-                                    </h5>
-                                </div>
-                                <span class="widget-numbers">3M</span>
-                            </div>
-                        </a>
-                    </div>
-                </section>
-                <section class="row">
-                    <div class="col-sm-12 col-md-6 col xl-6">
-                        <div class="card chart">
-                            <form action="#" method="post">
-                                <div class="input-group mb-3">
-                                    <input type="date" class="form-control" placeholder="Username"
-                                        aria-label="Username">
-                                    <span class="input-group-text">Đến ngày</span>
-                                    <input type="date" class="form-control" placeholder="Server" aria-label="Server">
-                                    <button type="button" class="btn btn-primary">Xem</button>
-                                </div>
-                            </form>
-                            <p>Tổng doanh thu: <span>100.000.000 VND</span></p>
-                            <table class="revenue table table-hover">
-                                <thead>
-                                    <th>#</th>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Doanh thu</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>GIA001</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>GIA002</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>GIA003</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>GIA004</td>
-                                        <td>100.000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <div class="card chart">
-                            <h4>Đơn hàng mới</h4>
-                            <table class="revenue table table-hover">
-                                <thead>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Trạng thái</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>GIA001</td>
-                                        <td>Chờ duyệt</td>
-                                    </tr>
-                                    <tr>
-                                        <td>GIA002</td>
-                                        <td>Đã duyệt</td>
-                                    </tr>
-                                    <tr>
-                                        <td>GIA003</td>
-                                        <td>Chờ TT</td>
-                                    </tr>
-                                    <tr>
-                                        <td>GIA004</td>
-                                        <td>Đã duyệt</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-xl-3">
-                        <div class="card chart">
-                            <h4>Khách hàng mới</h4>
-                            <table class="revenue table table-hover">
-                                <thead>
-                                    <th>#</th>
-                                    <th>Username</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>giangcoder1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>giangcoder2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>giangcoder3</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <script src="assets/js/main.js"></script>
-    <script>
-        new DataTable('#example');
-    </script> -->
-
-    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Left Sidebar End -->
     <div class="main-content ">
         <div class="page-content dark:bg-zinc-700">
@@ -218,8 +27,140 @@
                         </nav>
                     </div>
                 </div>
+                <div class="grid flex-end grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-10 my-10 text-end">
+                    <form action="" method="post">
+                        <input type="date" class="form-control" name="startTime">
+                        <input type="date" class="form-control" name="endTime">
+                        <button class="btn btn-primary" type="submit">Lọc</button>
+                    </form>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                    <div>
+                        <h5 class="text-15 mr-2 text-gray-800 dark:text-gray-100 text-center mb-10">Thống kê theo doanh thu</h5>
+                        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+                            <div class="grid justify-center items-center h-full">
+                                <canvas id="myChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="text-15 mr-2 text-gray-800 dark:text-gray-100  text-center my-2">Thống kê đơn hàng</h5>
+                        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+                            <div class="grid justify-center items-center h-full">
+                                <canvas id="ordersChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="text-15 mr-2 text-gray-800 dark:text-gray-100  text-center my-2">Thống kê sản phẩm bán chạy</h5>
+                        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+                            <div class="grid justify-center items-center h-full">
+                                <canvas id="bestsellingChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
         </div>
-        
+
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <?php echo json_encode($labels); ?>,
+                    datasets: [{
+                        label: 'Doanh thu theo tháng',
+                        data: <?php echo json_encode($data); ?>,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+
+
+            var ctx1 = document.getElementById('ordersChart').getContext('2d');
+            var ordersChart = new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: <?php echo json_encode($labels_orders); ?>,
+                    datasets: [{
+                        label: 'Số đơn hàng',
+                        data: <?php echo json_encode($data_orders); ?>,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+
+
+            var ctx2 = document.getElementById('bestsellingChart').getContext('2d');
+            var bestsellingChart = new Chart(ctx2, {
+                type: 'polarArea',
+                data: {
+                    labels: <?php echo json_encode($labels_bestselling); ?>,
+                    datasets: [{
+                        label: 'Số lượng bán được',
+                        data: <?php echo json_encode($data_bestselling); ?>,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

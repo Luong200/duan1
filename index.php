@@ -11,6 +11,8 @@
     include "dao/global.php";
     include "dao/user.php";
     include "dao/danhmuc.php";
+    include "dao/voucher.php";
+    include "dao/reviews.php";
     include "dao/sanpham.php";
     include "dao/product_variants.php";
     include "dao/giohang.php";
@@ -26,29 +28,65 @@
 
     if(!isset($_GET['pg'])){
 
+
         include "view/home.php";
     }else{
         switch ($_GET['pg']) {
             case 'sanpham':
+                $dsdm = danhmuc_all();
+                $kyw = "";
+                $titlepage = "";
+                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại, mặc định là trang 1
+                $perPage = 10; // Số sản phẩm hiển thị trên mỗi trang
+                $start = ($currentPage - 1) * $perPage; // Vị trí bắt đầu lấy dữ liệu từ cơ sở dữ liệu
+                if (!isset($_GET['iddm'])) {
+                    $iddm = 0;
+                } else {
+                    $iddm = $_GET['iddm'];
+                    $titlepage = get_name_dm($iddm);
+                }
+
+                $totalRecords = count_records($kyw, $iddm)[0]['total_records']; // Tổng số sản phẩm
+                if (isset($_GET['filter'])) {
+                    $filter = $_GET['filter'];
+                }
+
+                // Kiểm tra xem có phải là yêu cầu tìm kiếm không
+                if (isset($_POST["timkiem"]) && ($_POST["timkiem"])) {
+                    $kyw = $_POST["kyw"];
+                    $titlepage = "Kết quả tìm kiếm với từ khóa: <span>" . $kyw . "</span>";
+                }
+
+                // Lấy dữ liệu sản phẩm dựa trên từ khóa, ID danh mục và vị trí bắt đầu
+                $dssp = get_dssp($kyw, $iddm, $start, $perPage);
+
+                // Tính tổng số trang dựa trên số lượng sản phẩm và số sản phẩm trên mỗi trang
+                $totalPages = ceil($totalRecords / $perPage);
+
+                include "view/sanpham.php"; // Bao gồm giao diện hiển thị sản phẩm
+                break;
+            case 'timkiem':
                 $dsdm=danhmuc_all();
 
                 $kyw="";
                 $titlepage="";
                 if(!isset($_GET['iddm'])){
                     $iddm=0;
-                    
+
                 }else{
                     $iddm=$_GET['iddm'];
                     $titlepage=get_name_dm($iddm);
                 }
-
-                //kiem tra co phai la form seach k?
-                if(isset($_POST["timkiem"])&&($_POST["timkiem"])){
-                    $kyw=$_POST["kyw"];
-                    $titlepage="Kết quả tìm kiếm với từ khóa: <span>".$kyw. "</span>";    
+                if (isset($_GET['filter'])) {
+                    $filter = $_GET['filter'];
                 }
+                if(isset($_POST["timkiem"])){
 
-                $dssp=get_dssp($kyw,$iddm,12);
+                    $startTime = $_POST["startTime"];
+                    $endTime = $_POST["timeEnd"];
+
+                    $dssp=search($startTime,$endTime);
+                }
                 include "view/sanpham.php";
                 break;
             case 'sanphamchitiet':
@@ -105,9 +143,35 @@
                 }
                 // include "view/gioithieu.php";
                 break;
+
+            case 'reviews':
+                if(isset($_POST["submitReviews"]) && isset($_SESSION['s_user'])){
+                    $idbill=$_POST['idpro'];
+                    $rating=$_POST['rating'];
+                    $noidung=$_POST['noidung'];
+                    $idUser=$_SESSION['s_user']['id'];
+
+                    if (!empty($idbill) && !empty($rating)&& !empty($noidung) && !empty($idUser)){
+                        reviews_add($idUser,$idbill,$noidung,$rating);
+                        update_status($idbill,4);
+                        echo "<script>
+                            alert('Chúc mừng bạn đã đánh giá thành công,Bạn sẽ được chuyển về trang lịch sử mua hàng')
+                            setTimeout(function(){
+                                window.location.href = 'index.php?pg=mybill';
+                            },1000)
+                            </script>";
+                    }else {
+                        echo "<script>alert('Vui lòng nhập đủ thông tin')</script>";
+                    }
+                    //so sach voi database de lay gia trij ve
+                }
+                include "view/reviews.php";
+                break;
             case 'viewcart':
+             
                 if(isset($_GET['del'])&&($_GET['del'])==1){
                     unset($_SESSION["giohang"]);
+                    unset($_SESSION["sale_off_order"]);
                     // Hoacwj dungf $_SESSION["giohang"]=[];
                     header('location: index.php');
                 }else{
@@ -115,14 +179,15 @@
                         $tongdonhang=get_tongdonhang();
                     }
                     $giatrivoucher=0;
-                    if(isset($_GET["voucher"])&&($_GET["voucher"])==1){
-                        $tongdonhang=$_POST['tongdonhang'];
-                        $mavoucher=$_POST['mavoucher'];
+                    $maVoucher = '';
+                    if(isset($_GET["voucher"])&&($_GET["voucher"])==1 && !empty($_POST['mavoucher'])){
+                        $tongdonhang=$_POST['tongdonhang'] ?? 0;
+                        $maVoucher=$_POST['mavoucher'] ?? '';
                         //so sach voi database de lay gia trij ve
-                        $giatrivoucher=100000;
-                        
+                        $giatrivoucher=loadone_saleOff($maVoucher)['sale_off'] / 100;
                     }
-                    $thanhtoan=$tongdonhang-$giatrivoucher;
+                    $_SESSION["sale_off_order"] = $tongdonhang * $giatrivoucher ?? 0;
+                    $thanhtoan=$tongdonhang- $_SESSION["sale_off_order"];
                     include "view/viewcart.php";
                 }
                 
@@ -167,26 +232,27 @@
                     $nguoinhan_diachi='';
                     $nguoinhan_tel='';
                     $pttt=$_POST["pttt"];
-                    if(!empty($hoten) && !empty($diachi) && !empty($email) && !empty($dienthoai) ){
+                    if(!empty($hoten) && !empty($diachi) && !empty($email) && !empty($dienthoai) && !empty($_POST['id_user']) ){
+                    
                         $ngaydathang=date('h:i:sa d/m/Y');
                         // inser user moi
                         $username="guest".rand(1,999);
                         $password="123456";
-                        $iduser=user_insert_id($username,$password,$hoten,$diachi, $email, $dienthoai);
+                        $iduser=$_POST["id_user"];
                         //Tao don hang
                         $madh="Darcy".$iduser."-".date("His-dmY");
                         $total=get_tongdonhang();
                         $ship=0;
 
-                        if(isset($_SESSION['giatrivoucher'])){
-                            $voucher=$_SESSION["giatrivoucher"];
+                        if(isset($_SESSION['sale_off_order'])){
+                            $voucher=$_SESSION['sale_off_order'];
                         }else{
                             $voucher=0;
                         }
 
                         $tongthanhtoan=($total - $voucher) + $ship;
                         //tao bill
-                        $idbill=bill_insert_id($madh,$iduser,$hoten,$email,$dienthoai,$diachi,$ngaydathang, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
+                        $idbill=bill_insert_id($madh,$iduser,$hoten,$email,$dienthoai,$diachi, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
                         // insert gio hang từ session từ table cart
                         foreach ($_SESSION['giohang'] as $sp) {
                             extract($sp);
@@ -196,8 +262,41 @@
                         $_SESSION['giohang']=[];
                         include "view/bill_configm.php";
                     }else {
+                        if(!empty($hoten) && !empty($diachi) && !empty($email) && !empty($dienthoai)){
+                            $ngaydathang=date('h:i:sa d/m/Y');
+                            // inser user moi
+                            $username="guest".rand(1,999);
+                            $password="123456";
+                            // echo $username . "," .$password. "," .$hoten. "," .$diachi. "," .$email. "," .$dienthoai;
+                            // die();
+                            $iduser=user_insert_id($username,$password,$hoten,$diachi, $email, $dienthoai);
+                            //Tao don hang
+                            $madh="Darcy".$iduser."-".date("His-dmY");
+                            $total=get_tongdonhang();
+                            $ship=0;
+    
+                            if(isset($_SESSION['giatrivoucher'])){
+                                $voucher=$_SESSION["giatrivoucher"];
+                            }else{
+                                $voucher=0;
+                            }
+    
+                            $tongthanhtoan=($total - $voucher) + $ship;
+                            //tao bill
+                            $idbill=bill_insert_id($madh,$iduser,$hoten,$email,$dienthoai,$diachi, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
+                            // insert gio hang từ session từ table cart
+                            foreach ($_SESSION['giohang'] as $sp) {
+                                extract($sp);
+                                cart_insert($idpro, $price, $name, $img,  $soluong, $thanhtien,$idbill,$id_variants);
+                            }
+                            ///xóa sesion
+                            $_SESSION['giohang']=[];
+                            include "view/bill_configm.php";
+                        }else {
                         $error="Vui lòng nhập đầy đủ thông tin!";
                         header("location: index.php?pg=bill&error=$error");
+                    }
+
                     }
 
                     

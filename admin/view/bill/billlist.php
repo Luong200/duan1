@@ -62,7 +62,7 @@
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $nguoidat_tell?></td>
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $nguoidat_diachi?></td>                          
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $tongthanhtoan?></td>
-                            <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $bill_status=="0" ? "Đơn hàng mới" : ($bill_status=="1" ? "Đang xử lí" : ($bill_status=="2" ? "Đang giao hàng" : "Hoàn tất" ))?></td>
+                            <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $bill_status=="0" ? "Chờ kiểm duyệt" : ( $bill_status=="1" ? "đã kiểm duyệt" : ( $bill_status=="2" ? "Đang Giao Hàng" :  ( $bill_status=="3" ? "đã giao hàng" : "Đã đánh giá") ) ) ?></td>
                             <td  class="p-4 pr-8 border border-t-0 border-l-0 border-gray-50 dark:border-zinc-600"><?php echo $pttt=="0" ? "Thanh Toán khi nhận hàng" : ($pttt=="1" ? "Chuyển khoản" : "Thanh Toán  online" )?></td>
                             <td>
                                 <a href="index.php?pg=update_bill&id=<?php echo $id?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>

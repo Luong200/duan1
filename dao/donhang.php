@@ -1,10 +1,10 @@
 <?php
 require_once 'pdo.php';
 
-function bill_insert_id($madh,$iduser,$nguoidat_ten,$nguoidat_email,$nguoidat_tell,$nguoidat_diachi,$ngaydathang, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt){
-    $sql = "INSERT INTO bill(madh,iduser,nguoidat_ten,nguoidat_email, nguoidat_tell, nguoidat_diachi,ngaydathang,nguoinhan_ten,nguoinhan_diachi,nguoinhan_tel,total, ship, voucher,tongthanhtoan,pttt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+function bill_insert_id($madh,$iduser,$nguoidat_ten,$nguoidat_email,$nguoidat_tell,$nguoidat_diachi, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt){
+    $sql = "INSERT INTO bill(madh,iduser,nguoidat_ten,nguoidat_email, nguoidat_tell, nguoidat_diachi,nguoinhan_ten,nguoinhan_diachi,nguoinhan_tel,total, ship, voucher,tongthanhtoan,pttt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
-    return pdo_execute_id($sql,$madh,$iduser,$nguoidat_ten,$nguoidat_email,$nguoidat_tell,$nguoidat_diachi,$ngaydathang, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
+    return pdo_execute_id($sql,$madh,$iduser,$nguoidat_ten,$nguoidat_email,$nguoidat_tell,$nguoidat_diachi, $nguoinhan_ten, $nguoinhan_diachi, $nguoinhan_tel, $total, $ship, $voucher, $tongthanhtoan,$pttt);
 }
 
 function loadall_cart_count($idbill){
@@ -12,7 +12,19 @@ function loadall_cart_count($idbill){
     $bill=pdo_query($sql);
     return sizeof($bill);
 }
-function loadall_bill()
+
+
+function update_status($id,$status){
+    $sql = "UPDATE bill SET bill_status='$status' WHERE id=$id";
+    pdo_execute($sql);
+}
+function loadall_bill($iduser)
+{
+    $sql ="SELECT * FROM bill where iduser = '".$iduser."' order by id desc";
+    return pdo_query($sql);
+}
+
+function loadall_bill_admin()
 {
     $sql ="SELECT * FROM bill order by id desc";
     return pdo_query($sql);

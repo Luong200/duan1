@@ -12,6 +12,8 @@ if (isset($_SESSION['s_user']) && (is_array($_SESSION['s_user'])) && (count($_SE
 include "../dao/global.php";
 include "../dao/pdo.php";
 include "../dao/danhmuc.php";
+include "../dao/voucher.php";
+include "../dao/reviews.php";
 include "../dao/sanpham.php";
 include "../dao/product_variants.php";
 include "../dao/donhang.php";
@@ -25,6 +27,7 @@ if (isset($_GET["pg"])) {
     $pg = $_GET["pg"];
     switch ($pg) {
         ///DANH MUC
+
         case 'danhmucadd':
             if (isset($_POST['btnadd'])) {
                 $name = $_POST['name'];
@@ -40,9 +43,52 @@ if (isset($_GET["pg"])) {
             // $sanphamlist=get_dssp_new(100);
             include "view/danhmuc/danhmucadd.php";
             break;
+
+        case 'voucheradd':
+            if (isset($_POST['btnadd'])) {
+                $name = $_POST['name'];
+                $code = $_POST['code'];
+                $sale_off = $_POST['sale_off'];
+                if (!empty($name) && !empty($code) && !empty($sale_off)) {
+                    voucher_add($name,$code,$sale_off);
+                    $tb = "<script>alert('Đã thêm mã giảm giá thành công!')</script>";
+                } else {
+                    $tb = "<script>alert('Vui lòng nhập đầy đủ trường!')</script>";
+                }
+            }
+            // $sanphamlist=get_dssp_new(100);
+            include "view/voucher/voucheradd.php";
+            break;
         case 'danhmuclist':
             $listdanhmuc = loadall_danhmuc();
             include "view/danhmuc/danhmuclist.php";
+            break;
+
+
+        case 'reviews':
+            $listreviews = reviews_all();
+            include "view/danhgia/danhgialist.php";
+            break;
+
+        case 'reviews_delete':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $id = $_GET['id'];
+                delete_reviews($_GET['id']);
+            }
+            $listreviews = reviews_all();
+            include "view/danhgia/danhgialist.php";
+            break;
+
+        case 'voucherList':
+            $voucherList = voucher_all();
+            include "view/voucher/voucherlist.php";
+            break;
+
+        case 'suavoucher':
+            if (isset($_GET['id'])) {
+                $dm = loadone_voucher($_GET['id']);
+            }
+            include "view/voucher/voucherupdate.php";
             break;
         case 'danhmuc_delete':
             if (isset($_GET['id']) && ($_GET['id']) > 0) {
@@ -72,6 +118,34 @@ if (isset($_GET["pg"])) {
 
             $listdanhmuc = loadall_danhmuc();
             include "view/danhmuc/danhmuclist.php";
+            break;
+
+
+        case 'update_voucher':
+            if (isset($_POST["capnhat"]) && ($_POST["capnhat"])) {
+                $name = $_POST['name'];
+                $id = $_POST['id'];
+                $code = $_POST['code'];
+                $sale_off = $_POST['sale_off'];
+                if (!empty($name) && !empty($id) && !empty($code) && !empty($sale_off)) {
+                    update_voucher($id, $name,$code,$sale_off);
+                    $thongbao = "<script>alert('Đã cập nhật voucher thành công!')</script>";
+                } else {
+                    $thongbao = "<script>alert('Vui lòng nhập đầy đủ trường!')</script>";
+                }
+            }
+
+            $voucherList = voucher_all();
+            include "view/voucher/voucherlist.php";
+            break;
+
+        case 'voucher_delete':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $id = $_GET['id'];
+                delete_voucher($_GET['id']);
+            }
+            $voucherList = voucher_all();
+            include "view/voucher/voucherlist.php";
             break;
         ///SAN PHAM
         case 'sanphamlist':
@@ -342,7 +416,7 @@ if (isset($_GET["pg"])) {
                 include "./view/binhluan/binhluanlist.php";
                 break;
         case 'listbill':
-            $listbill = loadall_bill();
+            $listbill = loadall_bill_admin();
             include "./view/bill/billlist.php";
             break;
         case 'update_bill':
@@ -367,9 +441,36 @@ if (isset($_GET["pg"])) {
 
             break;
         default:
+
             include "view/home.php";
     }
 } else {
+    $startTime = $_POST['startTime'] ?? '';
+    $timeEnd = $_POST['endTime'] ?? '';
+
+    $allProducts = get_thongke_doanhthu_admin($startTime,$timeEnd);
+    $allDonhang = get_thongke_donhang_admin($startTime,$timeEnd);
+    $allDonhangBanchay = get_thongke_sanphambanchay_admin($startTime,$timeEnd);
+    $labels = [];
+    $data = [];
+    $labels_orders = [];
+    $data_orders = [];
+    foreach ($allProducts as $row) {
+        $labels[] = "Tháng : " .$row['thang'];
+        $data[] = $row['doanh_thu'];
+    }
+    foreach ($allDonhang as $row) {
+        $labels_orders[] = "Tháng : " .$row['thang'];
+        $data_orders[] = $row['so_don_hang'];
+    }
+
+    $labels_bestselling = [];
+    $data_bestselling = [];
+
+    foreach ($allDonhangBanchay as $row) {
+        $labels_bestselling[] = $row['name'];
+        $data_bestselling[] = $row['so_luong_ban'];
+    }
     include "view/home.php";
 }
 

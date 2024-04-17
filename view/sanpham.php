@@ -119,13 +119,23 @@
                         </div>
                         <div class="pagination_wrap pt-20">
                             <ul>
-                                <li><a href="#!">>></a></li>
-                                <li><a class="current_page" href="#!">1</a></li>
-                                <li><a href="#!">2</a></li>
-                                <li><a href="#!">3</a></li>
-                                <li><a href="#!">
-                                        << </a>
-                                </li>
+                                <li><a href="index.php?pg=sanpham&page=1<?php if($iddm > 0){ echo "&iddm=".$iddm;} ?>">&laquo;</a></li> <!-- Điều hướng đến trang đầu tiên -->
+                                <?php
+                                // Số trang được tính dựa trên tổng số sản phẩm và số sản phẩm trên mỗi trang
+                                $totalPages = ceil($totalRecords / $perPage);
+
+                                // Hiển thị liên kết cho từng trang
+                                for ($i = 1; $i <= $totalPages; $i++) {
+                                    // Kiểm tra xem trang hiện tại là trang nào, nếu là trang đó, thêm class "active"
+                                    $activeClass = ($currentPage == $i) ? "class='active'" : "";
+                                    echo "<li $activeClass><a href='index.php?pg=sanpham&page=$i";
+                                    if($iddm > 0){
+                                        echo "&iddm=".$iddm;
+                                    }
+                                    echo "'>$i</a></li>";
+                                }
+                                ?>
+                                <li><a href="index.php?pg=sanpham&page=<?php echo $totalPages; ?><?php if($iddm > 0){ echo "&iddm=".$iddm;} ?>">&raquo;</a></li> <!-- Điều hướng đến trang cuối cùng -->
                             </ul>
                         </div>
                     </div>
@@ -141,15 +151,18 @@
                         </div>
                         <div class="widget widget_price_filter">
                             <h2 class="widget__title">
-                                <span>Price Filtering</span>
+                                <span>Thời gian</span>
                             </h2>
-                            <div class="filter-price">
-                                <form>
-                                    <div id="slider-range"></div>
-                                    <p>Price : <input type="text" id="amount"></p>
-                                    <button>filter</button>
-                                </form>
-                            </div>
+                            <form action="index.php?pg=timkiem" method="post" >
+                                <div class="d-flex">
+                                    <input type="date" class="form-control" name="startTime" id="amount">
+                                    <input type="date" class="form-control" name="timeEnd" id="amount">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button name="timkiem" class="mt-2" type="submit">filter</button>
+                                </div>
+
+                            </form>
                         </div>
 
                         <div class="widget">

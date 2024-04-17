@@ -142,9 +142,15 @@ $html_dscate_view=showcategoryHeader($dscategory_view);
                                 <li class="">
                                     <a href="index.php?pg=sanpham">Shop</a>
                                 </li>
-                                <li class="">
-                                    <a href="#!">Blog</a>
-                                </li>
+                                <?php
+                                if (isset($_SESSION['s_user']) && (count($_SESSION['s_user']) > 0)) {
+                               ?>
+                                    <li class="">
+                                        <a href="index.php?pg=mybill">Đơn hàng của bạn</a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
                             </ul>
                         </div>
                         <div class="login-sign-btn">

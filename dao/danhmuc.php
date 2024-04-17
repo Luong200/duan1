@@ -83,6 +83,30 @@ function get_name_dm($id){
     $kq= pdo_query_one($sql);
     return $kq["name"];
 }
+
+function search($startTime, $endTime, $limit = 10) {
+    $sql = "SELECT s.id, s.name, s.img, s.price, s.view, s.mota, s.bestseller, s.iddm, s.soluong, 
+        MIN(v.price) AS gia_thap_nhat, MAX(v.price) AS gia_cao_nhat
+        FROM sanpham s
+        LEFT JOIN product_variants v ON s.id = v.product_id";
+
+    // Thêm điều kiện WHERE vào truy vấn
+    $whereClause = " WHERE 1=1"; // Một điều kiện luôn đúng để bắt đầu AND
+
+    // Nối điều kiện vào câu truy vấn
+    $sql .= $whereClause;
+
+    $sql .= " AND s.create_at BETWEEN '" . $startTime . "' AND '" . $endTime . "'";
+
+    // Sắp xếp theo id
+    $sql .= " GROUP BY s.id, s.name ORDER BY s.id DESC";
+
+    // Thêm giới hạn số lượng sản phẩm
+    $sql .= " LIMIT " . $limit;
+
+    // Thực thi câu truy vấn
+    return pdo_query($sql);
+}
 /////////////////////
 /////////////ADMIN/
 function showdm_admin($dsdm,$iddm){
